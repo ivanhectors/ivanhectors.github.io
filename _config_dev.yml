@@ -1,7 +1,7 @@
 # Site settings
 name: Ivan Hectors
 title: Ivan Hectors | Full Stack Developer
-description: Design-minded full stack developer focused on building beautiful interfaces and experiences
+description: Design-minded full-stack developer focused on building beautiful interfaces and experiences
 url: https://ivanhectors.github.io/
 baseurl: ''
 email: ivansnbl@gmail.com
@@ -15,8 +15,8 @@ social:
     url: https://twitter.com/ivanhectors
   - title: instagram
     url: https://instagram.com/ivanhectors
-  - title: codepen
-    url: http://codepen.io/ivanhectors
+  - title: facebook
+    url: http://facebook.com/ivanhectors
   - title: github
     url: https://github.com/ivanhectors
   - title: linkedin
