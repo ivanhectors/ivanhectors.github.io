@@ -21,6 +21,8 @@ social:
     url: https://github.com/ivanhectors
   - title: linkedin
     url: https://www.linkedin.com/in/ivanhectors
+  - title: blog
+    url: https://ivanhectors.blogspot.com/
 
 # Build settings
 markdown: kramdown
