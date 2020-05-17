@@ -1,33 +1,34 @@
 languages:
-  - item: JavaScript (ES6)
-  - item: TypeScript
-  - item: HTML
-  - item: CSS/Sass
-  - item: Python
+  - item: PHP
   - item: SQL
-  - item: R
+  - item: HTML 
+  - item: CSS
+  - item: Python
+  - item: JavaScript
+  - item: C#
+  - item: Ruby
+  - item: Gherkin
 
 frameworks:
-  - item: Ember & Glimmer
-  - item: React
+  - item: Bootstrap
+  - item: Selenium
   - item: Jekyll
-  - item: Node
-  - item: D3
+  - item: Xamarin
+  - item: Cucumber
   - item: Wordpress
-  - item: Timber
 
 tools:
-  - item: Bash
+  - item: Bitbucket
   - item: Git & Github
-  - item: Gulp & Grunt
+  - item: Cucumber
   - item: Chrome DevTools
   - item: Postman
-  - item: MongoDB
+  - item: Visual Studio Code
+  - item: phpMyAdmin
 
 design:
-  - item: Sketch
-  - item: InDesign
+  - item: Adobe Photoshop
+  - item: CorelDRAW
   - item: InVision
-  - item: Prototyping
-  - item: Wireframing
-  - item: User Testing
+  - item: Balsamiq Wireframes
+
