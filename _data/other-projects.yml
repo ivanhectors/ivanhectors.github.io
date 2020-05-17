@@ -1,7 +1,7 @@
 - name: Ecom
   url: https://github.com/ivanhectors/ecom/
   code: https://github.com/ivanhectors/ecom/
-  description: It's simple e-commerce website. Created whole project for coursework of web programming courses. Users are able to add shopping basket themselves until payment and checkout products.
+  description: It's simple e-commerce website. Created the whole project for coursework of web programming courses. Users are able to add selected products to shopping basket themselves until payment and checkout products.
   used:
     - thing: PHP
     - thing: HTML/CSS
