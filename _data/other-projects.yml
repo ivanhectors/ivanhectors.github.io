@@ -1,3 +1,15 @@
+- name: Homes
+  url: https://homes.com.au/
+  code: https://github.com/ivanhectors/homes/
+  description: Perform manual and automated testing based on test case work project with <a class="underline-link" href="https://netpoint.group" target="_blank">The Netpoint Group Australia</a>.
+  used:
+    - thing: Ruby
+    - thing: Selenium
+    - thing: Gherkin
+    - thing: Cucumber
+    - thing: BrowserStack
+    - thing: VS Code
+
 - name: Ecom
   url: https://github.com/ivanhectors/ecom/
   code: https://github.com/ivanhectors/ecom/
@@ -8,18 +20,8 @@
     - thing: SQL
     - thing: JavaScript
     - thing: Bootstrap
+    - thing: VS Code
 
-# - name: Halcyon Theme
-#   url: https://bchiang7.github.io/halcyon-site/
-#   code: https://github.com/bchiang7/halcyon-site
-#   description: A minimal, dark theme for Sublime Text, Atom, VS Code, and more published to <a class="underline-link" href="https://packagecontrol.io/packages/Halcyon%20Theme">Package Control</a>, <a class="underline-link" href="https://atom.io/themes/halcyon-syntax">Atom Package Manager</a>, <a class="underline-link" href="https://marketplace.visualstudio.com/items?itemName=brittanychiang.halcyon-vscode">Visual Studio Marketplace</a>, and <a class="underline-link" href="https://www.npmjs.com/package/hyper-halcyon-theme">NPM</a>.
-#   used:
-#     - thing: Gatsby
-#     - thing: Sublime Text
-#     - thing: Atom
-#     - thing: VS Code
-#     - thing: iTerm2
-#     - thing: Hyper
 
 # - name: Lonely Planet DBMS
 #   url: https://github.com/bchiang7/CS3200-Project
