@@ -1,7 +1,7 @@
 - name: Homes
   url: https://homes.com.au/
   code: https://github.com/ivanhectors/homes/
-  description: Perform manual and automated testing based on test case work project with <a class="underline-link" href="https://netpoint.group" target="_blank">The Netpoint Group Australia</a>.
+  description: Perform manual and automated testing based on test case work project with <a class="underline-link" href="https://netpoint.group" target="_blank">The Netpoint Group Australia</a> and <a class="underline-link" href="https://www.agentpoint.com.au" target="_blank">Agentpoint Pty Ltd</a>.
   used:
     - thing: Ruby
     - thing: Selenium
