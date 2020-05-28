@@ -22,7 +22,7 @@ social:
   - title: linkedin
     url: https://www.linkedin.com/in/ivanhectors
   - title: blog
-    url: https://ivanhectors.blogspot.com/
+    url: https://blog.ivanhectors.me/
 
 # Build settings
 markdown: kramdown
