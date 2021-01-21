@@ -9,6 +9,28 @@
     - thing: Cucumber
     - thing: BrowserStack
     - thing: VS Code
+    
+- name: KKO
+  url: https://github.com/ivanhectors/kko/
+  code: https://github.com/ivanhectors/kko/
+  description: University Project - Online Consultation System for Information System students.
+  used:
+    - thing: PHP
+    - thing: HTML5
+    - thing: CSS
+    - thing: MySQL
+    - thing: JavaScript
+
+- name: Duta Filia
+  url: https://github.com/ivanhectors/dutafilia/
+  code: https://github.com/ivanhectors/dutafilia/
+  description: University Project - Duta Filia is a Student Activity on Duta Wacana Christian University, Yogyakarta. <a class="underline-link" href="https://www.ukdw.ac.id/ukm-duta-filia/" target="_blank">Duta Filia</a> is a community of students who always hold or attend various events, training and seminars related to adolescent reproductive health. Duta Filia is also member of PIK - M (Information & Counseling Center) in Yogyakarta. This PIK-M is a program owned by BKKBN Yogyakarta, specifically for the Youth Reproductive Health Program. Various programs that are often organized by Duta Filia is Free HIV Test and Blood Donor Program. 
+  used:
+    - thing: PHP
+    - thing: HTML5
+    - thing: CSS
+    - thing: MySQL
+    - thing: JavaScript
 
 # - name: Ecom
 #   url: https://github.com/ivanhectors/ecom/
