@@ -35,6 +35,10 @@ Set `platform` to `Web`, `Mobile`, or `Web & Mobile`, and `project_period` to
 the month-and-year range shown on each card. Web projects use
 `action_type: web_application` and `url`; mobile projects use
 `action_type: mobile_app` and may define `app_store_url` and `play_store_url`.
+The `mobile_application` action type is also supported. Gallery screenshots
+are displayed without device frames, with their orientation and aspect ratio
+inferred from the image. If store URLs are not provided, a mobile project with
+a `url` shows a link to its source.
 Set `show_gallery: false` to omit the gallery from a project's detail dialog.
 The home page shows up to six projects; View All includes search and filters.
 

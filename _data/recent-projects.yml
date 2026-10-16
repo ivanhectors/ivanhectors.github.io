@@ -3,8 +3,8 @@
   image: /img/featured/sib/sib.png
   image_alt: SIB scholarship administration system
   client_id: duta-wacana
-  platform: Web
-  action_type: web_application
+  platform: Mobile
+  action_type: mobile_application
   project_period: Oct 2019 - Jan 2020
   description: A web-based administration system for university registration loans and need-based scholarships.
   key_insights:
@@ -12,10 +12,9 @@
     - Built dedicated workflows for need-based scholarship applications.
     - Delivered a web interface using PHP, JavaScript, and SQL.
   gallery:
-    - image: /img/featured/sib/sib.png
+    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
       alt: Screenshot of the SIB scholarship administration system
       caption: Web application
-      device: tablet
   technologies:
     - PHP
     - JavaScript

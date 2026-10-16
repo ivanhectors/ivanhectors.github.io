@@ -121,7 +121,7 @@
             {% if include.project.gallery %}
               {% for screenshot in include.project.gallery %}
               <figure class="project-gallery__item">
-                <div class="project-gallery__frame" data-device="{{screenshot.device | default: 'auto'}}">
+                <div class="project-gallery__frame">
                   <img
                     src="{% if screenshot.image contains '://' %}{{screenshot.image}}{% else %}{{site.baseurl}}{{screenshot.image}}{% endif %}"
                     alt="{{screenshot.alt | default: include.project.image_alt}}"
@@ -149,7 +149,7 @@
       <a class="project-dialog__visit" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
         Visit Project <span aria-hidden="true">&nearr;</span>
       </a>
-      {% elsif include.project.action_type == 'mobile_app' %}
+      {% elsif include.project.action_type == 'mobile_app' or include.project.action_type == 'mobile_application' %}
       <div class="project-dialog__downloads">
         {% if include.project.app_store_url %}
         <a class="project-dialog__visit" href="{{include.project.app_store_url}}" target="_blank" rel="noopener noreferrer">
@@ -161,6 +161,13 @@
           Get it on Google Play <span aria-hidden="true">&nearr;</span>
         </a>
         {% endif %}
+        {% unless include.project.app_store_url or include.project.play_store_url %}
+          {% if include.project.url %}
+        <a class="project-dialog__visit" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
+          View Project Source <span aria-hidden="true">&nearr;</span>
+        </a>
+          {% endif %}
+        {% endunless %}
       </div>
       {% endif %}
     </div>

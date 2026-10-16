@@ -345,23 +345,23 @@ $(function() {
 
       const isLandscape = image.naturalWidth > image.naturalHeight;
       const orientation = isLandscape ? 'landscape' : 'portrait';
-      const device =
-        frame.dataset.device === 'auto'
-          ? isLandscape
-            ? 'tablet'
-            : 'phone'
-          : frame.dataset.device;
-
-      frame.classList.add(
-        'project-gallery__frame--' + orientation,
-        'project-gallery__frame--' + device
-      );
+      frame.classList.add('project-gallery__frame--' + orientation);
+      frame.style.aspectRatio =
+        image.naturalWidth + ' / ' + image.naturalHeight;
     }
+
+    function showUnavailable() {
+      frame.classList.add('project-gallery__frame--unavailable');
+      console.error('Unable to load project screenshot:', image.src);
+    }
+
+    image.addEventListener('load', setFrameFromImage, { once: true });
+    image.addEventListener('error', showUnavailable, { once: true });
 
     if (image.complete && image.naturalWidth > 0) {
       setFrameFromImage();
-    } else {
-      image.addEventListener('load', setFrameFromImage, { once: true });
+    } else if (image.complete) {
+      showUnavailable();
     }
   });
 
