@@ -545,59 +545,41 @@
   &__frame {
     position: relative;
     display: flex;
-    width: min(68vw, 540px);
-    aspect-ratio: 4 / 3;
+    width: min(82vw, 540px);
+    aspect-ratio: 16 / 9;
     align-items: center;
     justify-content: center;
-    padding: 10px;
     overflow: hidden;
-    border: 1px solid rgba(#111, 0.7);
     border-radius: 24px;
-    background: #17191d;
+    background: rgba($slate, 0.08);
 
     img {
       display: block;
       width: 100%;
       height: 100%;
-      border-radius: 15px;
-      object-fit: contain;
+      object-fit: cover;
     }
 
-    &--tablet.project-gallery__frame--portrait {
-      width: min(58vw, 360px);
-      aspect-ratio: 3 / 4;
+    &--portrait {
+      width: min(68vw, 300px);
     }
 
-    &--phone {
-      width: min(54vw, 220px);
-      aspect-ratio: 393 / 852;
-      padding: 8px;
-      border: 3px solid #35373b;
-      border-radius: 36px;
-      box-shadow: inset 0 0 0 2px #08090a, 0 12px 30px rgba(#000, 0.18);
+    &--landscape {
+      width: min(82vw, 540px);
+    }
 
-      img {
-        border-radius: 27px;
-        object-fit: cover;
-      }
+    &--unavailable {
+      display: grid;
+      place-items: center;
+      color: $grey;
 
       &::after {
-        position: absolute;
-        z-index: 1;
-        top: 11px;
-        left: 50%;
-        width: 76px;
-        height: 22px;
-        border-radius: 999px;
-        background: #050505;
-        content: '';
-        transform: translateX(-50%);
+        content: 'Screenshot unavailable';
       }
-    }
 
-    &--phone.project-gallery__frame--landscape {
-      width: min(72vw, 440px);
-      aspect-ratio: 852 / 393;
+      img {
+        display: none;
+      }
     }
   }
 }
@@ -904,10 +886,12 @@ body.night .all-projects {
   }
 
   .project-gallery__frame {
-    width: min(78vw, 480px);
+    &--portrait {
+      width: min(66vw, 300px);
+    }
 
-    &--tablet.project-gallery__frame--portrait {
-      width: min(66vw, 320px);
+    &--landscape {
+      width: min(86vw, 480px);
     }
   }
 
