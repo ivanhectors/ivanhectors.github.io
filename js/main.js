@@ -159,7 +159,6 @@ $(function() {
         const header = dialog.querySelector('.project-dialog__header');
 
         scrollContainer.scrollTop = 0;
-        scrollContainer.style.paddingBottom = '';
         header.classList.remove('is-compact');
         dialog.showModal();
       }
@@ -181,17 +180,9 @@ $(function() {
         const isCompact = header.classList.contains('is-compact');
 
         if (scrollContainer.scrollTop > 32 && !isCompact) {
-          const expandedHeight = header.getBoundingClientRect().height;
-          const compactHeight = parseFloat(
-            getComputedStyle(header).getPropertyValue('--compact-header-height')
-          );
-
-          scrollContainer.style.paddingBottom =
-            Math.max(0, expandedHeight - compactHeight) + 'px';
           header.classList.add('is-compact');
         } else if (scrollContainer.scrollTop < 2 && isCompact) {
           header.classList.remove('is-compact');
-          scrollContainer.style.paddingBottom = '';
         }
       },
       { passive: true }
