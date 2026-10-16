@@ -1,34 +1,32 @@
+product management:
+  - item: Product Strategy & Roadmap
+  - item: User Stories & Acceptance Criteria
+  - item: Backlog Prioritization
+  - item: Continuous Product Discovery
+  - item: Data-Informed Decision Making
+  - item: SDLC & Agile/Scrum
+  - item: and many more
+
 languages:
   - item: PHP
   - item: SQL
-  - item: HTML 
-  - item: CSS
   - item: Python
   - item: JavaScript
-  - item: C#
   - item: Ruby
-  - item: Gherkin
-
-frameworks:
-  - item: Bootstrap
-  - item: Selenium
-  - item: Jekyll
-  - item: Xamarin
-  - item: Cucumber
-  - item: Wordpress
+  - item: TypeScript
+  - item: R
 
 tools:
-  - item: Bitbucket
-  - item: Git & Github
-  - item: Cucumber
-  - item: Chrome DevTools
+  - item: Jira & ClickUp
+  - item: Confluence
   - item: Postman
-  - item: Visual Studio Code
-  - item: phpMyAdmin
+  - item: Firebase & TestFlight
+  - item: Notion
+  - item: Sentry & AWS CloudWatch
+  - item: and many more
 
-design:
-  - item: Adobe Photoshop
-  - item: CorelDRAW
-  - item: InVision
-  - item: Balsamiq Wireframes
-
+design and flow:
+  - item: Figma & FigJam
+  - item: Miro
+  - item: Visio
+  - item: Draw.io
