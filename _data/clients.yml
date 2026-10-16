@@ -1,0 +1,26 @@
+- id: duta-wacana
+  name: Duta Wacana Christian University
+  industry: Education
+  industry_style: violet
+  url: https://www.ukdw.ac.id/
+
+- id: academic-coursework
+  name: Academic Coursework
+  industry: Education
+  industry_style: violet
+
+- id: homes-client-group
+  name: The Netpoint Group Australia and Agentpoint Pty Ltd
+  industry: Property Technology
+  industry_style: teal
+  url: https://homes.com.au/
+
+- id: information-systems-students
+  name: Information Systems Students
+  industry: Education
+  industry_style: violet
+
+- id: duta-filia
+  name: Duta Filia
+  industry: Community
+  industry_style: green

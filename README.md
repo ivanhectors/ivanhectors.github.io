@@ -1,78 +1,51 @@
-# Product Name
-> Short blurb about what your product does.
+# Ivan Hectors' personal website
 
-[![NPM Version][npm-image]][npm-url]
-[![Build Status][travis-image]][travis-url]
-[![Downloads Stats][npm-downloads]][npm-url]
+This site is built with Jekyll, Liquid templates, SCSS, and Gulp.
 
-One to two paragraph statement about your product and what it does.
+## Local preview
 
-![](header.png)
-
-## Installation
-
-OS X & Linux:
+Install Ruby 3.3 with DevKit and Node.js 24 or newer, then install the project
+dependencies:
 
 ```sh
-npm install my-crazy-module --save
+bundle install
+npm install
 ```
 
-Windows:
+Start the local preview:
 
 ```sh
-edit autoexec.bat
+npm start
 ```
 
-## Usage example
+Gulp builds the Jekyll site and serves it with BrowserSync. On Windows
+PowerShell, use `npm.cmd` instead of `npm` if script execution is blocked:
 
-A few motivating and useful examples of how your product can be used. Spice this up with code blocks and potentially more screenshots.
-
-_For more examples and usage, please refer to the [Wiki][wiki]._
-
-## Development setup
-
-Describe how to install all development dependencies and how to run an automated test-suite of some kind. Potentially do this for multiple platforms.
-
-```sh
-make install
-npm test
+```powershell
+npm.cmd install
+npm.cmd start
 ```
 
-## Release History
+## Project content
 
-* 0.2.1
-    * CHANGE: Update docs (module code remains unchanged)
-* 0.2.0
-    * CHANGE: Remove `setDefaultXYZ()`
-    * ADD: Add `init()`
-* 0.1.1
-    * FIX: Crash when calling `baz()` (Thanks @GenerousContributorName!)
-* 0.1.0
-    * The first proper release
-    * CHANGE: Rename `foo()` to `bar()`
-* 0.0.1
-    * Work in progress
+Project cards and detail dialogs are driven by `_data/recent-projects.yml`.
+Set each project's `client_id` to an `id` in `_data/clients.yml`; client names,
+optional `logo_url` values, and industry badges come from that client record.
+Set `platform` to `Web`, `Mobile`, or `Web & Mobile`, and `project_period` to
+the month-and-year range shown on each card. Web projects use
+`action_type: web_application` and `url`; mobile projects use
+`action_type: mobile_app` and may define `app_store_url` and `play_store_url`.
+Set `show_gallery: false` to omit the gallery from a project's detail dialog.
+The home page shows up to six projects; View All includes search and filters.
 
-## Meta
+## Experience content
 
-Your Name – [@YourTwitter](https://twitter.com/dbader_org) – YourEmail@example.com
+Each company in `_data/experience.yml` can include a `location`, a
+`tenure_start`/`tenure_end` month range, and one or more `roles`. Role entries
+can include a `highlights` list of experience bullet points. Company tenure is
+calculated automatically from the month fields; use `present` for a current
+role. Leave `location` or `highlights` empty until their content is ready.
 
-Distributed under the XYZ license. See ``LICENSE`` for more information.
-
-[https://github.com/yourname/github-link](https://github.com/dbader/)
-
-## Contributing
-
-1. Fork it (<https://github.com/yourname/yourproject/fork>)
-2. Create your feature branch (`git checkout -b feature/fooBar`)
-3. Commit your changes (`git commit -am 'Add some fooBar'`)
-4. Push to the branch (`git push origin feature/fooBar`)
-5. Create a new Pull Request
-
-<!-- Markdown link & img dfn's -->
-[npm-image]: https://img.shields.io/npm/v/datadog-metrics.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/datadog-metrics
-[npm-downloads]: https://img.shields.io/npm/dm/datadog-metrics.svg?style=flat-square
-[travis-image]: https://img.shields.io/travis/dbader/node-datadog-metrics/master.svg?style=flat-square
-[travis-url]: https://travis-ci.org/dbader/node-datadog-metrics
-[wiki]: https://github.com/yourname/yourproject/wiki
+The Resume page renders the repository's `resume.pdf` with a custom PDF.js
+viewer. Replace that file to update the document; the page provides print,
+direct download, and zoom controls.

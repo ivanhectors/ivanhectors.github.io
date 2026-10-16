@@ -1,24 +1,89 @@
 - company: PT Kode Aplikasi Indonesia
   url: https://nbs.co.id/
-  time: Oct 2023 - Present
-  position: System Analyst (Full-Time)
+  location:
+  tenure_start: '2023-10'
+  tenure_end: present
+  roles:
+    - position: System Analyst (Full-Time)
+      time: Oct 2023 - June 2025
+      start_date: '2023-10'
+      end_date: '2025-06'
+      highlights:
+        - Gathered and documented business requirements from stakeholders.
+        - Translated business processes into functional system specifications.
+        - Coordinated with developers and QA to clarify expected system behavior.
+        - Supported user acceptance testing and tracked issues through resolution.
+        - Prepared process documentation and updates for project stakeholders.
+    - position: System Analyst Supervisor (Full-Time)
+      time: June 2025 - Present
+      start_date: '2025-06'
+      end_date: present
+      highlights:
+        - Led analysis and delivery planning across concurrent system initiatives.
+        - Reviewed requirements and solution designs before development started.
+        - Coordinated priorities and handoffs across business and technical teams.
+        - Monitored delivery risks, open issues, and project milestones.
+        - Mentored analysts and improved team documentation practices.
 
 - company: PT Mayora Indah, Tbk
   url: https://www.mayoraindah.co.id/
-  time: Mar 2021 - Aug 2023
-  position: System & Procedure (Full-Time)
+  location:
+  tenure_start: '2021-03'
+  tenure_end: '2023-08'
+  roles:
+    - position: System & Procedure (Full-Time)
+      time: Mar 2021 - Aug 2023
+      start_date: '2021-03'
+      end_date: '2023-08'
+      highlights:
+        - Reviewed operational procedures and identified process improvement opportunities.
+        - Collected requirements from business users across multiple functions.
+        - Prepared process maps, work instructions, and supporting documentation.
+        - Coordinated reviews and approvals with relevant stakeholders.
+        - Followed up on procedure updates and communicated changes to teams.
 
 - company: PT SoftwareSeni Indonesia
   url: https://www.softwareseni.co.id/
-  time: Oct 2019 - Jan 2020
-  position: Quality Assurance (Internship)
+  location:
+  tenure_start: '2019-10'
+  tenure_end: '2020-01'
+  roles:
+    - position: Quality Assurance (Internship)
+      time: Oct 2019 - Jan 2020
+      start_date: '2019-10'
+      end_date: '2020-01'
+      highlights:
+        - Assisted international students with inquiries and administrative requests.
+        - Supported exchange and international program application processes.
+        - Prepared correspondence, records, and program information for students.
+        - Coordinated event logistics and communication with campus partners.
+        - Maintained organized documentation for office activities and services.
 
 - company: Office of International Affairs, Duta Wacana Christian University
   url: https://www.ukdw.ac.id/en/oia/
-  time: Oct 2017 - Dec 2020
-  position: Student Assistant (Part-Time)
+  location:
+  tenure_start: '2017-10'
+  tenure_end: '2020-12'
+  roles:
+    - position: Student Assistant (Part-Time)
+      time: Oct 2017 - Dec 2020
+      start_date: '2017-10'
+      end_date: '2020-12'
+      highlights:
+        - Supported event-day operations and visitor assistance.
+        - Helped prepare venues and coordinate materials before sessions.
+        - Shared directions and event information with attendees.
+        - Coordinated with team members to respond to operational requests.
+        - Assisted with post-event wrap-up and returning event materials.
 
 - company: ARTJOG MMXIX - International Contemporary Arts Festival
   url: https://artjog.co.id/
-  time: July - Aug 2019
-  position: Supporting Event (Contract)
+  location:
+  tenure_start: '2019-07'
+  tenure_end: '2019-08'
+  roles:
+    - position: Supporting Event (Contract)
+      time: July - Aug 2019
+      start_date: '2019-07'
+      end_date: '2019-08'
+      highlights: []

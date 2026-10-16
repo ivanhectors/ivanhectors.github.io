@@ -1,0 +1,62 @@
+---
+layout: default
+title: All Projects | Ivan Hector Sinambela
+---
+
+<div id="site" class="all-projects-page">
+  {% include switch.html %}
+  <main class="section recent-projects all-projects">
+    <div class="recent-projects__heading">
+      <div>
+        <div class="section__title">All Projects</div>
+        <p class="recent-projects__intro">
+          Browse projects by client industry and platform, or search by title, client, or description.
+        </p>
+      </div>
+      <a class="recent-projects__view-all" href="{{site.baseurl}}/">Back to home</a>
+    </div>
+
+    <div class="all-projects__controls">
+      <label class="all-projects__search-label" for="project-search">Search projects</label>
+      <input
+        class="all-projects__search"
+        id="project-search"
+        type="search"
+        placeholder="Search title, client, badge, or description"
+        autocomplete="off"
+      >
+      <div class="all-projects__filters" aria-label="Filter projects">
+        <div class="all-projects__filter-group" role="group" aria-label="Filter by platform">
+          <span class="all-projects__filter-label">Platform</span>
+          <button class="all-projects__filter is-active" type="button" data-project-filter-group="platform" data-project-filter="all" aria-pressed="true">All</button>
+          {% assign platforms = site.data.recent-projects | map: 'platform' | uniq | sort %}
+          {% for platform in platforms %}
+          <button class="all-projects__filter" type="button" data-project-filter-group="platform" data-project-filter="{{platform | slugify}}" aria-pressed="false">{{platform}}</button>
+          {% endfor %}
+        </div>
+        <div class="all-projects__filter-group" role="group" aria-label="Filter by client industry">
+          <span class="all-projects__filter-label">Client industry</span>
+          <button class="all-projects__filter is-active" type="button" data-project-filter-group="industry" data-project-filter="all" aria-pressed="true">All</button>
+          {% assign industries = site.data.clients | map: 'industry' | uniq | sort %}
+          {% for industry in industries %}
+          <button class="all-projects__filter" type="button" data-project-filter-group="industry" data-project-filter="{{industry | slugify}}" aria-pressed="false">{{industry}}</button>
+          {% endfor %}
+        </div>
+      </div>
+      <p class="all-projects__results" id="project-results" aria-live="polite"></p>
+    </div>
+
+    <div class="section__content">
+      <div class="project-grid" id="all-projects-grid">
+        {% for project in site.data.recent-projects %}
+          {% assign project_client = site.data.clients | where: 'id', project.client_id | first %}
+          {% capture project_dialog_id %}all-project-project-dialog-{{forloop.index}}{% endcapture %}
+          {% include project-card.html project=project client=project_client dialog_id=project_dialog_id %}
+        {% endfor %}
+      </div>
+      <p class="all-projects__empty" id="project-empty" hidden>No projects match your search or filters.</p>
+      <nav class="all-projects__pagination" id="project-pagination" aria-label="Project pages"></nav>
+    </div>
+  </main>
+  {% include footer.html %}
+</div>

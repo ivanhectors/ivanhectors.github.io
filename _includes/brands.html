@@ -1,0 +1,26 @@
+<section class="section brands">
+  <div class="section__title">Brands I've worked with</div>
+  <div class="section__content">
+    <div class="brands__grid">
+      {% for brand in site.data.brands limit:12 %}
+      <a
+        class="brand-card"
+        href="{{brand.url}}"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="--brand-color: {{brand.color}}"
+      >
+        <div class="brand-card__logo">
+          {% if brand.logo_url %}
+          <img src="{{brand.logo_url}}" alt="{{brand.name}} logo" loading="lazy">
+          <span hidden>{{brand.wordmark}}</span>
+          {% else %}
+          <span>{{brand.wordmark}}</span>
+          {% endif %}
+        </div>
+        <span class="brand-card__name">{{brand.name}}</span>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>

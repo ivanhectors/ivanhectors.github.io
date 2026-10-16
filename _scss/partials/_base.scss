@@ -173,6 +173,27 @@ strong {
   }
 }
 
+.background,
+.skills,
+.experience {
+  display: block;
+  width: calc(100% - 64px);
+  max-width: 1180px;
+  margin: 24px auto;
+  padding: 48px;
+
+  .section__title {
+    width: auto;
+    margin: 0 0 24px;
+    text-align: left;
+  }
+
+  .section__content {
+    max-width: none;
+    padding: 0;
+  }
+}
+
 .arrow-link {
   @include transition;
   font-weight: 700;
