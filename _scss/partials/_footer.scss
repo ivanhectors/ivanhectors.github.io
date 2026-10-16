@@ -28,11 +28,31 @@
         display: block;
       }
     }
+    .bottom {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    &-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+    }
+    &-icon {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
     .emoji {
       width: 20px;
       height: 20px;
-      margin: 0 3px;
-      vertical-align: text-bottom;
+      margin: 0;
     }
   }
   &__links {
