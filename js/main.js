@@ -1,17 +1,22 @@
 $(function() {
   const d = new Date();
-  const hours = d.getHours();
-  const night = hours >= 19 || hours <= 7; // between 7pm and 7am
+  const night = localStorage.getItem('theme') === 'dark';
   const body = document.querySelector('body');
   const root = document.documentElement;
-  const toggle = document.getElementById('toggle');
   const input = document.getElementById('switch');
 
-  if (night && input && toggle) {
-    input.checked = true;
-  }
   body.classList.toggle('night', night);
   root.classList.toggle('night', night);
+
+  if (input) {
+    input.checked = night;
+    input.addEventListener('change', function() {
+      const isNight = input.checked;
+      localStorage.setItem('theme', isNight ? 'dark' : 'light');
+      body.classList.toggle('night', isNight);
+      root.classList.toggle('night', isNight);
+    });
+  }
 
   document.querySelectorAll('.job__tenure').forEach(function(tenure) {
     const startParts = tenure.dataset.tenureStart.split('-').map(Number);
@@ -34,14 +39,6 @@ $(function() {
 
     tenure.textContent = duration.join(' ');
   });
-
-  if (toggle && input) {
-    toggle.addEventListener('click', function() {
-      const isChecked = input.checked;
-      body.classList.toggle('night', !isChecked);
-      root.classList.toggle('night', !isChecked);
-    });
-  }
 
   document
     .querySelectorAll('[data-project-period]')
