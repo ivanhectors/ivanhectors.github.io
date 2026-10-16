@@ -3,21 +3,41 @@
   <div class="section__content">
     <div class="jobs">
       {% for job in site.data.experience %}
-      <div class="job">
-        <div class="time-place">
-          <div class="job__company">
-            <a href="{{job.url}}" target="_blank">{{job.company}}</a>
-          </div>
-          <div class="job__time">{{job.time}}</div>
+      <div class="job{% if job.roles.size > 1 %} job--timeline{% endif %}">
+        <div class="job__company">
+          <a href="{{job.url}}" target="_blank" rel="noopener noreferrer">{{job.company}}</a>
+          {% if job.location %}
+          <div class="job__location">{{job.location}}</div>
+          {% endif %}
+          {% if job.tenure_start %}
+          <div
+            class="job__tenure"
+            data-tenure-start="{{job.tenure_start}}"
+            data-tenure-end="{{job.tenure_end}}"
+          ></div>
+          {% endif %}
         </div>
-        <div class="job__position">{{job.position}}</div>
+        <div class="job__roles{% if job.roles.size == 1 %} job__roles--single{% endif %}">
+          {% for role in job.roles %}
+          <div class="job__role">
+            <div class="job__position">{{role.position}}</div>
+            <div class="job__time">{{role.time}}</div>
+            {% if role.highlights.size > 0 %}
+            <ul class="job__highlights">
+              {% for highlight in role.highlights %}
+              <li>{{highlight}}</li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </div>
+          {% endfor %}
+        </div>
       </div>
       {% endfor %}
     </div>
-  <h3 class="intro__contact">
- <span>
-    View <a href="https://drive.google.com/file/d/1wjDjt2OqpEzbe6ZJJhHqjXD_kZfF2ZbD/view" target="_blank" class="highlight-link">My Resume</a> or <a href="https://www.linkedin.com/in/ivanhectors" target="_blank" class="highlight-link">My Profile Details</a>
-  </span>
-  </h3>
+    <div class="experience__links">
+      View <a href="{{site.baseurl}}/resume.html" class="highlight-link">My Resume</a>
+      or <a href="https://www.linkedin.com/in/ivanhectors" target="_blank" rel="noopener noreferrer" class="highlight-link">My Profile Details</a>
+    </div>
   </div>
 </section>

@@ -1,0 +1,102 @@
+- name: SIB
+  url: https://github.com/ivanhectors/sib/
+  image: /img/featured/sib/sib.png
+  image_alt: SIB scholarship administration system
+  client_id: duta-wacana
+  platform: Web
+  action_type: web_application
+  project_period: Oct 2019 - Jan 2020
+  description: A web-based administration system for university registration loans and need-based scholarships.
+  key_insights:
+    - Organized student loan and scholarship registration in one administration system.
+    - Built dedicated workflows for need-based scholarship applications.
+    - Delivered a web interface using PHP, JavaScript, and SQL.
+  gallery:
+    - image: /img/featured/sib/sib.png
+      alt: Screenshot of the SIB scholarship administration system
+      caption: Web application
+      device: tablet
+  technologies:
+    - PHP
+    - JavaScript
+    - HTML/CSS
+    - SQL
+
+- name: Jajan
+  url: https://github.com/ivanhectors/jajan/
+  image: /img/featured/jajan/jajan.png
+  image_alt: Jajan e-commerce project
+  client_id: academic-coursework
+  platform: Web
+  action_type: web_application
+  project_period: Feb 2020 - Jun 2020
+  show_gallery: false
+  description: A coursework e-commerce website where users can add products to a basket and complete checkout.
+  key_insights:
+    - Created a product browsing and shopping-basket experience.
+    - Connected the checkout flow to the site's product data.
+    - Implemented the application with PHP, JavaScript, and SQL.
+  technologies:
+    - PHP
+    - JavaScript
+    - HTML/CSS
+    - SQL
+
+- name: Homes
+  url: https://homes.com.au/
+  client_id: homes-client-group
+  platform: Web
+  action_type: web_application
+  project_period: Feb 2021 - Aug 2021
+  description: Manual and automated testing based on test case work for The Netpoint Group Australia and Agentpoint Pty Ltd.
+  key_insights:
+    - Supported manual and automated testing for Homes.com.au.
+    - Worked from test cases and browser automation workflows.
+    - Used Ruby, Selenium, Cucumber, and BrowserStack.
+  technologies:
+    - Ruby
+    - Selenium
+    - Gherkin
+    - Cucumber
+    - BrowserStack
+    - VS Code
+
+- name: KKO
+  url: https://github.com/ivanhectors/kko/
+  image: /img/featured/kko/kko.png
+  image_alt: KKO online consultation system
+  client_id: information-systems-students
+  platform: Web
+  action_type: web_application
+  project_period: Mar 2019 - Jul 2019
+  description: An online consultation system for Information Systems students.
+  key_insights:
+    - Built an online consultation workflow for Information Systems students.
+    - Brought student consultation information into one web application.
+    - Implemented the project with PHP, JavaScript, and MySQL.
+  technologies:
+    - PHP
+    - HTML5
+    - CSS
+    - MySQL
+    - JavaScript
+
+- name: Duta Filia
+  url: https://github.com/ivanhectors/dutafilia/
+  image: /img/featured/dutafilia/dutafilia.png
+  image_alt: Duta Filia community website
+  client_id: duta-filia
+  platform: Web
+  action_type: web_application
+  project_period: Aug 2018 - Dec 2018
+  description: A community website for Duta Filia, a student activity group at Duta Wacana Christian University.
+  key_insights:
+    - Created a dedicated online home for the Duta Filia student community.
+    - Organized community information in an accessible website.
+    - Built with PHP, JavaScript, and MySQL.
+  technologies:
+    - PHP
+    - HTML5
+    - CSS
+    - MySQL
+    - JavaScript

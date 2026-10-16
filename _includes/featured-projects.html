@@ -1,61 +1,26 @@
-<section class="section featured-projects">
-  <div class="section__title">Featured Projects</div>
+<section class="section recent-projects">
+  <div class="recent-projects__heading">
+    <div>
+      <div class="section__title">Recent Projects</div>
+      <p class="recent-projects__intro">
+        A selection of recent work &mdash; mobile apps, web platforms, and everything in between.
+      </p>
+    </div>
+    <a
+      class="recent-projects__view-all"
+      href="{{site.baseurl}}/projects.html"
+    >
+      View all <span aria-hidden="true">&rarr;</span>
+    </a>
+  </div>
+
   <div class="section__content">
-        <div class="project sib">
-      <figure class="project__pic">
-        <a href="https://github.com/ivanhectors/sib/" target="_blank">
-          <img src="{{site.baseurl}}/img/featured/sib/sib.png" alt="">
-        </a>
-      </figure>
-      <figcaption class="project__caption">
-        <div class="project__name">
-          <a href="https://github.com/ivanhectors/sib/" target="_blank">SIB</a>
-        </div>
-        <p>University Project - Web-Based Administration System for Applying Registration Loan and Need-Based Scholarship at University built with PHP, JavaScript, HTML/CSS & SQL.</p>
-      </figcaption>
+    <div class="project-grid">
+      {% for project in site.data.recent-projects limit:6 %}
+      {% assign project_client = site.data.clients | where: 'id', project.client_id | first %}
+      {% capture project_dialog_id %}home-project-dialog-{{forloop.index}}{% endcapture %}
+      {% include project-card.html project=project client=project_client dialog_id=project_dialog_id %}
+      {% endfor %}
     </div>
-    
-<!--     <div class="project kko">
-      <figure class="project__pic">
-        <a href="https://github.com/ivanhectors/kko/" target="_blank">
-          <img src="{{site.baseurl}}/img/featured/kko/kko.png" alt="">
-        </a>
-      </figure>
-      <figcaption class="project__caption">
-        <div class="project__name">
-          <a href="https://github.com/ivanhectors/kko/" target="_blank">KKO</a>
-        </div>
-        <p>University Project - Online Consultation System for Information System students built with PHP, JavaScript, HTML/CSS & SQL.</p>
-      </figcaption>
-    </div>
-
-    <div class="project dutafilia">
-      <figure class="project__pic">
-        <a href="https://github.com/ivanhectors/dutafilia/" target="_blank">
-          <img src="{{site.baseurl}}/img/featured/dutafilia/dutafilia.png" alt="">
-        </a>
-      </figure>
-      <figcaption class="project__caption">
-        <div class="project__name">
-          <a href="https://github.com/ivanhectors/dutafilia/" target="_blank">Duta Filia</a>
-        </div>
-        <p>Duta Filia is a community website for sharing information about various events, training and seminars related to adolescent reproductive health. Website built with PHP, JavaScript, HTML/CSS & SQL.</p>
-      </figcaption>
-    </div> -->
-
-    <div class="project jajan">
-      <figure class="project__pic">
-        <a href="https://github.com/ivanhectors/jajan/" target="_blank">
-          <img src="{{site.baseurl}}/img/featured/jajan/jajan.png" alt="">
-        </a>
-      </figure>
-      <figcaption class="project__caption">
-        <div class="project__name">
-          <a href="https://github.com/ivanhectors/jajan/" target="_blank">Jajan</a>
-        </div>
-        <p>It's simple e-commerce website. Created the whole project for coursework of web programming courses. Users are able to add selected products to shopping basket themselves until payment and checkout products. Website built with PHP, JavaScript, HTML/CSS & SQL.</p>
-      </figcaption>
-    </div>
-
   </div>
 </section>

@@ -1,0 +1,71 @@
+- name: Google
+  wordmark: GOOGLE
+  logo_url: https://cdn.simpleicons.org/Google/4285F4
+  url: https://www.google.com/
+  color: '#4285f4'
+
+- name: Spotify
+  wordmark: SPOTIFY
+  logo_url: https://cdn.simpleicons.org/Spotify/1DB954
+  url: https://www.spotify.com/
+  color: '#1db954'
+
+- name: Nike
+  wordmark: NIKE
+  logo_url: https://cdn.simpleicons.org/Nike/111111
+  url: https://www.nike.com/
+  color: '#111111'
+
+- name: Apple
+  wordmark: APPLE
+  logo_url: https://cdn.simpleicons.org/Apple/111111
+  url: https://www.apple.com/
+  color: '#111111'
+
+- name: Figma
+  wordmark: FIGMA
+  logo_url: https://cdn.simpleicons.org/Figma/F24E1E
+  url: https://www.figma.com/
+  color: '#f24e1e'
+
+- name: Airbnb
+  wordmark: AIRBNB
+  logo_url: https://cdn.simpleicons.org/Airbnb/FF5A5F
+  url: https://www.airbnb.com/
+  color: '#ff5a5f'
+
+- name: Netflix
+  wordmark: NETFLIX
+  logo_url: https://cdn.simpleicons.org/Netflix/E50914
+  url: https://www.netflix.com/
+  color: '#e50914'
+
+- name: PayPal
+  wordmark: PAYPAL
+  logo_url: https://cdn.simpleicons.org/PayPal/003087
+  url: https://www.paypal.com/
+  color: '#003087'
+
+- name: Uber
+  wordmark: UBER
+  logo_url: https://cdn.simpleicons.org/Uber/000000
+  url: https://www.uber.com/
+  color: '#000000'
+
+- name: Samsung
+  wordmark: SAMSUNG
+  logo_url: https://cdn.simpleicons.org/Samsung/1428A0
+  url: https://www.samsung.com/
+  color: '#1428a0'
+
+- name: Adidas
+  wordmark: ADIDAS
+  logo_url: https://cdn.simpleicons.org/Adidas/000000
+  url: https://www.adidas.com/
+  color: '#000000'
+
+- name: GitHub
+  wordmark: GITHUB
+  logo_url: https://cdn.simpleicons.org/GitHub/181717
+  url: https://github.com/
+  color: '#181717'

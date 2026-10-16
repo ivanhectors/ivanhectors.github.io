@@ -1,0 +1,168 @@
+{% capture searchable_project %}{{include.project.name}} {{include.client.name}} {{include.client.industry}} {{include.project.platform}} {{include.project.description}}{% endcapture %}
+<article
+  class="project"
+  data-project-platform="{{include.project.platform | slugify}}"
+  data-project-industry="{{include.client.industry | slugify}}"
+  data-project-search="{{searchable_project | strip_newlines | downcase | escape}}"
+>
+  <button
+    class="project__link"
+    type="button"
+    data-project-dialog="{{include.dialog_id}}"
+    aria-haspopup="dialog"
+    aria-label="View details for {{include.project.name}}"
+  >
+    {% if include.project.image %}
+    <figure class="project__pic">
+      <img src="{{site.baseurl}}{{include.project.image}}" alt="{{include.project.image_alt}}" loading="lazy">
+    </figure>
+    {% else %}
+    <div class="project__pic project__pic--placeholder" aria-hidden="true">
+      <span>{{include.project.name}}</span>
+    </div>
+    {% endif %}
+    <div class="project__badges" aria-label="Client industry and platform">
+      <span class="project__badge project__badge--industry-{{include.client.industry_style}}">
+        {{include.client.industry}}
+      </span>
+      <span class="project__badge project__badge--platform-{{include.project.platform | slugify}}">
+        {{include.project.platform}}
+      </span>
+    </div>
+    <div class="project__body">
+      <h3 class="project__name">{{include.project.name}}</h3>
+      {% if include.project.project_period %}
+      <p class="project__timeline">{{include.project.project_period}}</p>
+      {% endif %}
+      <p class="project__description">{{include.project.description}}</p>
+      <span class="project__footer">View details <span aria-hidden="true">&rarr;</span></span>
+    </div>
+  </button>
+</article>
+
+<dialog
+  class="project-dialog"
+  id="{{include.dialog_id}}"
+  aria-labelledby="{{include.dialog_id}}-title"
+>
+  <div class="project-dialog__scroll">
+    <header class="project-dialog__header">
+      <div class="project-dialog__heading">
+        <div class="project__badges" aria-label="Client industry and platform">
+          <span class="project__badge project__badge--industry-{{include.client.industry_style}}">
+            {{include.client.industry}}
+          </span>
+          <span class="project__badge project__badge--platform-{{include.project.platform | slugify}}">
+            {{include.project.platform}}
+          </span>
+        </div>
+        <h2 id="{{include.dialog_id}}-title">{{include.project.name}}</h2>
+        <div class="project-dialog__client">
+          {% if include.client.logo_url %}
+          <img
+            class="project-dialog__client-logo"
+            src="{% if include.client.logo_url contains '://' %}{{include.client.logo_url}}{% else %}{{site.baseurl}}{{include.client.logo_url}}{% endif %}"
+            alt="{{include.client.name}} logo"
+            loading="lazy"
+          >
+          {% else %}
+          {% assign client_words = include.client.name | split: ' ' %}
+          <span class="project-dialog__client-monogram" aria-hidden="true">
+            {% for word in client_words limit:2 %}{{word | slice: 0, 1}}{% endfor %}
+          </span>
+          {% endif %}
+          <span>{{include.client.name}}</span>
+        </div>
+      </div>
+      <button class="project-dialog__close" type="button" aria-label="Close project details">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </header>
+
+    <div class="project-dialog__content">
+      <p class="project-dialog__description">{{include.project.description}}</p>
+
+      {% if include.project.project_period %}
+      <section class="project-dialog__section">
+        <h3>Project Period</h3>
+        <p class="project-dialog__period" data-project-period="{{include.project.project_period}}">
+          {{include.project.project_period}}
+        </p>
+      </section>
+      {% endif %}
+
+      {% if include.project.key_insights %}
+      <section class="project-dialog__section">
+        <h3>Key insights</h3>
+        <ul class="project-dialog__insights">
+          {% for insight in include.project.key_insights %}
+          <li>{{insight}}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      {% if include.project.technologies %}
+      <section class="project-dialog__section">
+        <h3>Tech stack</h3>
+        <div class="project__technologies">
+          {% for technology in include.project.technologies %}
+          <span class="project__technology">{{technology}}</span>
+          {% endfor %}
+        </div>
+      </section>
+      {% endif %}
+
+      {% if include.project.show_gallery != false %}
+        {% if include.project.gallery or include.project.image %}
+        <section class="project-dialog__section">
+          <h3>Gallery</h3>
+          <div class="project-gallery" aria-label="{{include.project.name}} project gallery">
+            {% if include.project.gallery %}
+              {% for screenshot in include.project.gallery %}
+              <figure class="project-gallery__item">
+                <div class="project-gallery__frame" data-device="{{screenshot.device | default: 'auto'}}">
+                  <img
+                    src="{% if screenshot.image contains '://' %}{{screenshot.image}}{% else %}{{site.baseurl}}{{screenshot.image}}{% endif %}"
+                    alt="{{screenshot.alt | default: include.project.image_alt}}"
+                    loading="lazy"
+                  >
+                </div>
+                {% if screenshot.caption %}
+                <figcaption>{{screenshot.caption}}</figcaption>
+                {% endif %}
+              </figure>
+              {% endfor %}
+            {% else %}
+            <figure class="project-gallery__item">
+              <div class="project-gallery__frame" data-device="auto">
+                <img src="{{site.baseurl}}{{include.project.image}}" alt="{{include.project.image_alt}}" loading="lazy">
+              </div>
+            </figure>
+            {% endif %}
+          </div>
+        </section>
+        {% endif %}
+      {% endif %}
+
+      {% if include.project.action_type == 'web_application' and include.project.url %}
+      <a class="project-dialog__visit" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
+        Visit Project <span aria-hidden="true">&nearr;</span>
+      </a>
+      {% elsif include.project.action_type == 'mobile_app' %}
+      <div class="project-dialog__downloads">
+        {% if include.project.app_store_url %}
+        <a class="project-dialog__visit" href="{{include.project.app_store_url}}" target="_blank" rel="noopener noreferrer">
+          Download on the App Store <span aria-hidden="true">&nearr;</span>
+        </a>
+        {% endif %}
+        {% if include.project.play_store_url %}
+        <a class="project-dialog__visit" href="{{include.project.play_store_url}}" target="_blank" rel="noopener noreferrer">
+          Get it on Google Play <span aria-hidden="true">&nearr;</span>
+        </a>
+        {% endif %}
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</dialog>

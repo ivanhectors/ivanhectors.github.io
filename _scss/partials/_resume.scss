@@ -1,0 +1,205 @@
+.resume-page {
+  min-height: 100vh;
+  padding: 32px 72px;
+  background: rgba($slate, 0.12);
+  color: $dark-grey;
+
+  &__header {
+    display: flex;
+    width: min(100%, 1080px);
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto 20px;
+
+    h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+  }
+
+  &__back {
+    color: $blue;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+.resume-viewer {
+  width: min(100%, 1080px);
+  margin: 0 auto;
+
+  &__stage {
+    width: 100%;
+    overflow: visible;
+    scrollbar-color: rgba($slate, 0.7) transparent;
+  }
+
+  &__document {
+    position: relative;
+    min-width: max-content;
+  }
+
+  &__status {
+    margin: 0;
+    padding: 24px;
+    color: $grey;
+    text-align: center;
+  }
+
+  &__pages {
+    display: grid;
+    justify-items: center;
+    gap: 18px;
+  }
+
+  &__page {
+    max-width: 100%;
+    background: $white;
+    box-shadow: none;
+  }
+
+  &__canvas {
+    display: block;
+    max-width: none;
+    box-shadow: none;
+  }
+
+  &__toolbar {
+    position: fixed;
+    z-index: 5;
+    top: 50%;
+    right: max(14px, calc((100vw - 1260px) / 2));
+    display: grid;
+    gap: 8px;
+    padding: 8px;
+    transform: translateY(-50%);
+    border: 1px solid rgba($slate, 0.3);
+    border-radius: 16px;
+    background: rgba($white, 0.78);
+    box-shadow:
+      0 14px 36px rgba($dark-grey, 0.16),
+      inset 0 1px 0 rgba($white, 0.95);
+    backdrop-filter: blur(18px);
+  }
+
+  &__button {
+    display: grid;
+    min-width: 42px;
+    min-height: 42px;
+    place-items: center;
+    padding: 0 10px;
+    border: 1px solid rgba($blue, 0.14);
+    border-radius: 11px;
+    background: rgba($blue, 0.06);
+    color: $dark-grey;
+    font: inherit;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    @include transition;
+
+    &:hover,
+    &:focus-visible {
+      border-color: rgba($blue, 0.42);
+      background: rgba($blue, 0.12);
+      color: $blue;
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.4;
+    }
+  }
+}
+
+body.night .resume-page {
+  background: rgba($slate, 0.12);
+  color: $dark-grey;
+
+  a {
+    color: $blue;
+  }
+}
+
+@include mobile {
+  .resume-page {
+    padding: 20px 12px;
+
+    &__header {
+      padding-right: 54px;
+
+      h1 {
+        font-size: 1.25rem;
+      }
+    }
+  }
+
+  .resume-viewer {
+    &__toolbar {
+      top: auto;
+      right: 12px;
+      bottom: 18px;
+      grid-template-columns: repeat(4, auto);
+      grid-auto-flow: column;
+      width: max-content;
+      transform: none;
+      gap: 6px;
+      padding: 6px;
+      border-radius: 14px;
+    }
+
+    &__button {
+      min-width: 40px;
+      min-height: 40px;
+      padding: 0 8px;
+    }
+  }
+}
+
+@media print {
+  .resume-page {
+    min-height: 0;
+    padding: 0;
+  }
+
+  .resume-page__header,
+  .resume-viewer__toolbar {
+    display: none;
+  }
+
+  .resume-viewer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+  }
+
+  .resume-viewer__stage {
+    max-height: none;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .resume-viewer__document {
+    min-width: 0;
+    padding: 0;
+  }
+
+  .resume-viewer__pages {
+    gap: 0;
+  }
+
+  .resume-viewer__page {
+    width: 100% !important;
+    overflow: visible;
+    box-shadow: none;
+    break-after: page;
+    page-break-after: always;
+  }
+
+  .resume-viewer__canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
