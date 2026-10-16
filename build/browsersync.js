@@ -13,6 +13,18 @@ const templatePath = [
   '_posts/*',
 ];
 
+const spawnJekyll = args => {
+  if (process.platform === 'win32') {
+    return cp.spawn(
+      process.env.ComSpec || 'cmd.exe',
+      ['/d', '/s', '/c', jekyll, ...args],
+      { stdio: 'inherit' }
+    );
+  }
+
+  return cp.spawn(jekyll, args, { stdio: 'inherit' });
+};
+
 module.exports = gulp => {
   const reloadBrowser = done => {
     browserSync.reload();
@@ -20,16 +32,16 @@ module.exports = gulp => {
   };
   // run `jekyll build`
   gulp.task('jekyll-build', done => {
-    return cp.spawn(jekyll, ['build'], { stdio: 'inherit' }).on('close', done);
+    return spawnJekyll(['build']).on('close', done);
   });
 
   // run `jekyll build` with _config_dev.yml
   gulp.task('jekyll-dev', done => {
-    return cp
-      .spawn(jekyll, ['build', '--config', '_config.yml,_config_dev.yml'], {
-        stdio: 'inherit',
-      })
-      .on('close', done);
+    return spawnJekyll([
+      'build',
+      '--config',
+      '_config.yml,_config_dev.yml',
+    ]).on('close', done);
   });
 
   // Rebuild Jekyll then reload the page

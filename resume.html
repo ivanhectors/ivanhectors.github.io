@@ -1,0 +1,43 @@
+---
+layout: default
+title: Resume | Ivan Hector Sinambela
+---
+
+<main class="resume-page">
+  <header class="resume-page__header">
+    <a class="resume-page__back" href="{{site.baseurl}}/">Back to home</a>
+    <h1>Resume</h1>
+  </header>
+
+  <section class="resume-viewer" aria-label="Resume PDF viewer">
+    <div class="resume-viewer__stage">
+      <div class="resume-viewer__document" data-resume-pdf="{{site.baseurl}}/resume.pdf">
+        <p class="resume-viewer__status" role="status">Loading resume…</p>
+        <div class="resume-viewer__pages"></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="resume-viewer__toolbar" role="toolbar" aria-label="Resume tools">
+    <button class="resume-viewer__button" type="button" data-resume-print aria-label="Print resume" title="Print">
+      Print
+    </button>
+    <a
+      class="resume-viewer__button"
+      href="{{site.baseurl}}/resume.pdf"
+      download="Ivan-Hector-Sinambela-Resume.pdf"
+      aria-label="Download resume"
+      title="Download"
+    >
+      Download
+    </a>
+    <button class="resume-viewer__button" type="button" data-resume-zoom="out" aria-label="Zoom out" title="Zoom out">
+      &minus;
+    </button>
+    <button class="resume-viewer__button" type="button" data-resume-zoom="in" aria-label="Zoom in" title="Zoom in">
+      +
+    </button>
+  </div>
+</main>
+
+<script type="module" src="{{site.baseurl}}/js/resume.js"></script>

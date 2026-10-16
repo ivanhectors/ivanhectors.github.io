@@ -1,24 +1,105 @@
 .experience {
   .jobs {
-    margin-bottom: 100px;
+    margin-bottom: 48px;
   }
   .job {
-    margin-bottom: 25px;
-    .time-place {
-      display: flex;
-      justify-content: space-between;
-      @include mobile {
-        display: block;
-      }
+    display: grid;
+    grid-template-columns: minmax(180px, 0.8fr) minmax(0, 1.2fr);
+    gap: 24px;
+    margin-bottom: 28px;
+    padding-bottom: 26px;
+    border-bottom: 1px solid rgba($slate, 0.28);
+
+    &:last-child {
+      border-bottom: 0;
     }
+
     &__company {
       font-weight: 700;
     }
+
+    &__location,
+    &__tenure {
+      color: $grey;
+      font-size: 0.82rem;
+      font-weight: 400;
+    }
+
+    &__tenure {
+      margin-top: 3px;
+    }
+
+    &__roles {
+      display: grid;
+      gap: 18px;
+
+      &--single {
+        border-left: 0;
+
+        .job__role {
+          padding-left: 0;
+
+          &::before {
+            display: none;
+          }
+        }
+      }
+
+    }
+
+    &--timeline {
+      .job__roles {
+        border-left: 1px solid rgba($slate, 0.5);
+      }
+
+      .job__role + .job__role {
+        padding-top: 16px;
+        border-top: 1px solid rgba($slate, 0.28);
+
+        &::before {
+          top: 23px;
+        }
+      }
+    }
+
+    &__role {
+      position: relative;
+      padding-left: 20px;
+
+      &::before {
+        position: absolute;
+        top: 7px;
+        left: -5px;
+        width: 9px;
+        height: 9px;
+        border: 2px solid $blue;
+        border-radius: 50%;
+        background: $white;
+        content: '';
+      }
+    }
+
+    &__position {
+      font-weight: 600;
+    }
+
     &__time {
+      color: $grey;
       font-size: 0.9rem;
       font-family: 'Inconsolata', monospace;
-      @include mobile {
-        font-size: 0.8rem;
+    }
+
+    &__highlights {
+      display: grid;
+      gap: 6px;
+      margin: 10px 0 0;
+      padding-left: 20px;
+      list-style: disc;
+
+      li {
+        padding-left: 2px;
+        font-size: 0.9rem;
+        line-height: 1.5;
       }
     }
   }
@@ -27,6 +108,59 @@
     &:after {
       width: 20px;
       height: 20px;
+    }
+  }
+
+}
+
+body.night .experience .job {
+  border-color: rgba($white, 0.12);
+
+  &--timeline .job__role + .job__role {
+    border-color: rgba($white, 0.12);
+  }
+
+  &__role::before {
+    background: $night;
+  }
+
+  &__time,
+  &__location,
+  &__tenure {
+    color: $slate;
+  }
+}
+
+@include mobile {
+  .experience .job {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+
+    &--timeline .job__roles {
+      margin-left: 4px;
+    }
+
+    &__time {
+      font-size: 0.8rem;
+    }
+  }
+}
+
+.experience {
+  &__links {
+    text-align: center;
+
+    .highlight-link {
+      @include transition;
+      display: inline-block;
+      padding: 2px 3px;
+      box-shadow: inset 0 -3px 0 $blue;
+
+      &:hover,
+      &:focus {
+        box-shadow: inset 0 -33px 0 $blue;
+        color: $white;
+      }
     }
   }
 }

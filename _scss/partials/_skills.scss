@@ -1,16 +1,12 @@
 .skills {
   .skillz {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
     @include weird-medium {
-      flex-wrap: wrap;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     &__category {
-      @include weird-medium {
-        width: 47%;
-        margin-right: 5px;
-        margin-bottom: 25px;
-      }
       &__label {
         font-weight: 700;
         color: $black;
@@ -19,6 +15,12 @@
       &__item {
         margin: 3px 0;
         font-size: 0.9rem;
+      }
+    }
+
+    @include mobile {
+      .skills .skillz {
+        gap: 18px;
       }
     }
   }

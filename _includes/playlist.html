@@ -1,20 +1,76 @@
+<main class="playlist-page">
+  <div class="playlist-page__shell">
+    <nav class="playlist-page__nav" aria-label="Playlist navigation">
+      <a href="{{site.baseurl}}/" class="playlist-page__home-link">
+        <span aria-hidden="true">&larr;</span> Back home
+      </a>
+    </nav>
 
-<header class="intro">
-  
-    <h2 class="intro__contact">Did i mention that i love music? well, you can Listen to my
-      <strong><a href="https://open.spotify.com/playlist/06mHKfU9ttHiRa4tjeL1mC" target="_blank" class="highlight-link">Playlist</a></strong> from <strong>Spotify</strong> and <strong> Apple Music </strong>here. Enjoy!
-      <span class="emoji running"></span>
-    </h2>
+    <section class="playlist-page__hero" aria-labelledby="playlist-title">
+      <div class="playlist-page__hero-copy">
+        <h1 id="playlist-title">A good song can change <span>the whole day.</span></h1>
+        <p class="playlist-page__description">
+          Here's a little collection of songs I keep coming back to. Pick your
+          player, press play, and enjoy the soundtrack.
+        </p>
+      </div>
+      <div class="playlist-page__art" aria-hidden="true">
+        <div class="playlist-page__record">
+          <span class="playlist-page__record-label"></span>
+        </div>
+        <span class="playlist-page__art-note playlist-page__art-note--one">&#9835;</span>
+        <span class="playlist-page__art-note playlist-page__art-note--two">&#9834;</span>
+      </div>
+    </section>
 
-    <iframe src="https://open.spotify.com/embed/playlist/06mHKfU9ttHiRa4tjeL1mC" style="border: 0; width: 100%; height: 500px;" allowfullscreen allow="encrypted-media"></iframe>
-  <iframe allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write" frameborder="0" height="1000px" style="width:100%;max-width:100%;overflow:hidden;border-radius:10px;" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation" src="https://embed.music.apple.com/id/playlist/ivans-picks/pl.u-d2b05ZWCL6aGAgK"></iframe>
-  
-    <h3 class="intro__contact">
-      <span>Go back </span>
-      <span class="emoji pointer"></span>
-      <span>
-        <a href="{{site.url}}" class="highlight-link">home</a>
-      </span>
-    </h3>
-  </header>
-  
+    <section class="playlist-page__players" aria-label="Listen to the playlist">
+      <article class="playlist-card playlist-card--spotify">
+        <header class="playlist-card__header">
+          <div>
+            <p class="playlist-card__eyebrow">THE PLAYLIST</p>
+            <h2>Listen on Spotify</h2>
+          </div>
+          <span class="playlist-card__icon playlist-card__icon--spotify" aria-hidden="true">&#9835;</span>
+        </header>
+        <p class="playlist-card__description">Ivan's Picks · a little bit of everything.</p>
+        <iframe
+          class="playlist-card__embed playlist-card__embed--spotify"
+          src="https://open.spotify.com/embed/playlist/06mHKfU9ttHiRa4tjeL1mC"
+          title="Ivan's Picks playlist on Spotify"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+        ></iframe>
+        <a
+          class="playlist-card__link"
+          href="https://open.spotify.com/playlist/06mHKfU9ttHiRa4tjeL1mC"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Open in Spotify <span aria-hidden="true">&nearr;</span></a>
+      </article>
+
+      <article class="playlist-card playlist-card--apple">
+        <header class="playlist-card__header">
+          <div>
+            <p class="playlist-card__eyebrow">THE SAME GOOD TUNES</p>
+            <h2>Listen on Apple Music</h2>
+          </div>
+          <span class="playlist-card__icon playlist-card__icon--apple" aria-hidden="true">&#9835;</span>
+        </header>
+        <p class="playlist-card__description">Find the playlist in your Apple Music app.</p>
+        <iframe
+          class="playlist-card__embed playlist-card__embed--apple"
+          src="https://embed.music.apple.com/id/playlist/ivans-picks/pl.u-d2b05ZWCL6aGAgK"
+          title="Ivan's Picks playlist on Apple Music"
+          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+          loading="lazy"
+        ></iframe>
+        <a
+          class="playlist-card__link"
+          href="https://music.apple.com/id/playlist/ivans-picks/pl.u-d2b05ZWCL6aGAgK"
+          target="_blank"
+          rel="noopener noreferrer"
+        >Open in Apple Music <span aria-hidden="true">&nearr;</span></a>
+      </article>
+    </section>
+  </div>
+</main>
