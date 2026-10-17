@@ -29,23 +29,23 @@
     - Built dedicated workflows for need-based scholarship applications.
     - Delivered a web interface using PHP, JavaScript, and SQL.
   gallery:
-    - image: /img/featured/sib/screen-1.png
+    - image: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/92/b2/4d/92b24d72-2063-e439-0523-e1516f1b42cf/Banner_AppStore_V4_Special_Mission_1284x2778_1.jpg/230x498bb.webp
       alt: SIB Mobile Screen 1
       caption: Beranda
       orientation: portrait
-    - image: /img/featured/sib/screen-2.png
+    - image: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/92/b2/4d/92b24d72-2063-e439-0523-e1516f1b42cf/Banner_AppStore_V4_Special_Mission_1284x2778_1.jpg/230x498bb.webp
       alt: SIB Mobile Screen 2
       caption: Special Mission
       orientation: portrait
-    - image: /img/featured/sib/screen-3.png
+    - image: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/92/b2/4d/92b24d72-2063-e439-0523-e1516f1b42cf/Banner_AppStore_V4_Special_Mission_1284x2778_1.jpg/230x498bb.webp
       alt: SIB Mobile Screen 3
       caption: Katalog Produk
       orientation: portrait
-    - image: /img/featured/sib/screen-4.png
+    - image: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/92/b2/4d/92b24d72-2063-e439-0523-e1516f1b42cf/Banner_AppStore_V4_Special_Mission_1284x2778_1.jpg/230x498bb.webp
       alt: SIB Mobile Screen 4
       caption: Detail Produk
       orientation: portrait
-    - image: /img/featured/sib/screen-5.png
+    - image: https://is1-ssl.mzstatic.com/image/thumb/PurpleSource211/v4/92/b2/4d/92b24d72-2063-e439-0523-e1516f1b42cf/Banner_AppStore_V4_Special_Mission_1284x2778_1.jpg/230x498bb.webp
       alt: SIB Mobile Screen 5
       caption: Promo Cicilan
       orientation: portrait
