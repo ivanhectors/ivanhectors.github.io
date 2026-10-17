@@ -5,6 +5,23 @@
   client_id: duta-wacana
   platform: Mobile
   action_type: mobile_application
+  # Master Data Store IDs (otomatis get API dari App Store / Play Store jika ID diisi):
+  app_store_id: "1534301787"        # Contoh: ID App Store Eraspace dari screenshot
+  play_store_id: "com.eraspace.app" # Contoh: ID Google Play Package
+  # Master Data App Store Stats (nilai awal/fallback, otomatis diperbarui live via iTunes API):
+  app_stats:
+    rating: 4.5
+    total_reviews: "1,6 RB"
+    chart_rank: "#8"
+    category: "Shopping"
+    content_rating: "4+"
+  # Master Data Google Play Store Stats:
+  play_stats:
+    rating: 4.6
+    total_reviews: "28 RB"
+    chart_rank: "#5"
+    category: "Belanja"
+    content_rating: "3+"
   project_period: Oct 2019 - Jan 2020
   description: A web-based administration system for university registration loans and need-based scholarships.
   key_insights:
@@ -12,36 +29,26 @@
     - Built dedicated workflows for need-based scholarship applications.
     - Delivered a web interface using PHP, JavaScript, and SQL.
   gallery:
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
-    - image: https://play-lh.googleusercontent.com/ZjKVWJuxzRi2mrFoIttjrrU3Ojp85iUXp6MKLvEhzp5kNC3D1pIzsYWDxqIRWwbwnCT0dAt_eKSQ9tbdBfSi=w1052-h592-rw
-      alt: Screenshot of the SIB scholarship administration system
-      caption: Web application
+    - image: /img/featured/sib/screen-1.png
+      alt: SIB Mobile Screen 1
+      caption: Beranda
+      orientation: portrait
+    - image: /img/featured/sib/screen-2.png
+      alt: SIB Mobile Screen 2
+      caption: Special Mission
+      orientation: portrait
+    - image: /img/featured/sib/screen-3.png
+      alt: SIB Mobile Screen 3
+      caption: Katalog Produk
+      orientation: portrait
+    - image: /img/featured/sib/screen-4.png
+      alt: SIB Mobile Screen 4
+      caption: Detail Produk
+      orientation: portrait
+    - image: /img/featured/sib/screen-5.png
+      alt: SIB Mobile Screen 5
+      caption: Promo Cicilan
+      orientation: portrait
   technologies:
     - PHP
     - JavaScript

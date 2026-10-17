@@ -147,48 +147,215 @@ $(function() {
     });
   }
 
-  function updateProjectGalleryControls(carousel) {
-    const gallery = carousel.querySelector('.project-gallery');
-    const controls = carousel.querySelector('.project-gallery__controls');
-    const buttons = Array.from(
-      carousel.querySelectorAll('[data-gallery-direction]')
-    );
-    const status = carousel.querySelector('.project-gallery__status');
-    const items = Array.from(
-      gallery.querySelectorAll('.project-gallery__item')
-    );
-    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
-    const isScrollable = maxScroll > 1;
+  const appStatsCache = new Map();
 
-    controls.classList.toggle('is-scrollable', isScrollable);
-
-    if (!isScrollable) {
+  function animateCountUp(el, targetVal, duration) {
+    if (!el) return;
+    const isDecimal =
+      String(targetVal).includes('.') || String(targetVal).includes(',');
+    const num = parseFloat(String(targetVal).replace(',', '.'));
+    if (isNaN(num)) {
+      el.textContent = targetVal;
       return;
     }
 
-    const currentScroll = gallery.scrollLeft;
-    const currentIndex = items.reduce(function(closestIndex, item, index) {
-      const targetScroll = Math.min(
-        item.offsetLeft - items[0].offsetLeft,
-        maxScroll
-      );
-      const closestTarget = Math.min(
-        items[closestIndex].offsetLeft - items[0].offsetLeft,
-        maxScroll
-      );
+    const animDuration = duration || 1000;
+    const startTime = performance.now();
 
-      return Math.abs(targetScroll - currentScroll) <
-        Math.abs(closestTarget - currentScroll)
-        ? index
-        : closestIndex;
-    }, 0);
+    function frame(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / animDuration, 1);
+      const ease = 1 - Math.pow(1 - progress, 3);
+      const current = num * ease;
+      el.textContent = isDecimal
+        ? current.toFixed(1).replace('.', ',')
+        : Math.round(current).toString();
 
-    status.textContent = currentIndex + 1 + ' / ' + items.length;
-    buttons.forEach(function(button) {
-      const direction = Number(button.dataset.galleryDirection);
-      button.disabled =
-        direction < 0 ? currentScroll <= 1 : currentScroll >= maxScroll - 1;
-    });
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        el.textContent = isDecimal
+          ? num.toFixed(1).replace('.', ',')
+          : num.toString();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+
+  function calculateStars(ratingNum) {
+    const rounded = Math.round(ratingNum * 2) / 2;
+    const full = Math.floor(rounded);
+    const half = rounded % 1 !== 0;
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+      if (i <= full) {
+        stars += '★';
+      } else if (i === full + 1 && half) {
+        stars += '★';
+      } else {
+        stars += '☆';
+      }
+    }
+    return stars;
+  }
+
+  function renderStoreStats(statsContainer, storeType) {
+    const prefix = storeType === 'playstore' ? 'playstore' : 'appstore';
+    statsContainer.dataset.currentStore = storeType;
+
+    const ratingEl = statsContainer.querySelector('[data-stat-value="rating"]');
+    const reviewsLabelEl = statsContainer.querySelector(
+      '[data-stat-label="reviews"]'
+    );
+    const starsEl = statsContainer.querySelector('[data-stat-stars]');
+    const ageEl = statsContainer.querySelector('[data-stat-value="age"]');
+    const rankEl = statsContainer.querySelector('[data-stat-value="rank"]');
+    const categoryEl = statsContainer.querySelector(
+      '[data-stat-value="category"]'
+    );
+
+    const ratingVal = statsContainer.dataset[prefix + 'Rating'];
+    const reviewsVal = statsContainer.dataset[prefix + 'Reviews'];
+    const rankVal = statsContainer.dataset[prefix + 'Rank'];
+    const categoryVal = statsContainer.dataset[prefix + 'Category'];
+    const ageVal = statsContainer.dataset[prefix + 'Age'];
+
+    if (ratingEl && ratingVal) {
+      animateCountUp(ratingEl, ratingVal, 800);
+      const ratingNum = parseFloat(String(ratingVal).replace(',', '.'));
+      if (!isNaN(ratingNum) && starsEl) {
+        starsEl.textContent = calculateStars(ratingNum);
+      }
+    }
+
+    if (reviewsLabelEl && reviewsVal) {
+      reviewsLabelEl.textContent = reviewsVal
+        .toUpperCase()
+        .includes('PENILAIAN')
+        ? reviewsVal
+        : reviewsVal + ' PENILAIAN';
+    }
+
+    if (ageEl && ageVal) {
+      ageEl.textContent = ageVal;
+    }
+
+    if (rankEl && rankVal) {
+      rankEl.textContent = rankVal;
+    }
+
+    if (categoryEl && categoryVal) {
+      categoryEl.textContent = categoryVal;
+    }
+  }
+
+  async function loadAppStats(dialog) {
+    const statsContainer = dialog.querySelector('.project-app-stats');
+    if (!statsContainer) return;
+
+    if (!statsContainer._tabsInitialized) {
+      statsContainer._tabsInitialized = true;
+      const tabButtons = dialog.querySelectorAll('.project-app-stats__tab');
+      tabButtons.forEach(function(tabBtn) {
+        tabBtn.addEventListener('click', function() {
+          const store = tabBtn.dataset.storeTab;
+          tabButtons.forEach(function(btn) {
+            btn.classList.toggle('is-active', btn === tabBtn);
+          });
+          renderStoreStats(statsContainer, store);
+        });
+      });
+    }
+
+    const currentStore = statsContainer.dataset.currentStore || 'appstore';
+    renderStoreStats(statsContainer, currentStore);
+
+    const appStoreId = statsContainer.dataset.appstoreId;
+    if (appStoreId) {
+      let data = appStatsCache.get(appStoreId);
+      if (!data) {
+        try {
+          const res = await fetch(
+            'https://itunes.apple.com/lookup?id=' +
+              encodeURIComponent(appStoreId) +
+              '&country=id'
+          );
+          if (res.ok) {
+            const json = await res.json();
+            if (json.results && json.results.length > 0) {
+              data = json.results[0];
+              appStatsCache.set(appStoreId, data);
+            }
+          }
+        } catch (err) {
+          console.warn('App Store API fetch warning:', err);
+        }
+      }
+
+      if (data) {
+        if (data.averageUserRating) {
+          statsContainer.dataset.appstoreRating = data.averageUserRating
+            .toFixed(1)
+            .replace('.', ',');
+        }
+
+        if (data.userRatingCount) {
+          let countStr = data.userRatingCount.toLocaleString('id-ID');
+          if (data.userRatingCount >= 1000) {
+            countStr =
+              (data.userRatingCount / 1000).toFixed(1).replace('.', ',') +
+              ' RB';
+          }
+          statsContainer.dataset.appstoreReviews = countStr;
+        }
+
+        if (data.contentAdvisoryRating) {
+          statsContainer.dataset.appstoreAge = data.contentAdvisoryRating;
+        }
+
+        if (data.primaryGenreName) {
+          statsContainer.dataset.appstoreCategory = data.primaryGenreName;
+        }
+
+        if (data.trackViewUrl) {
+          const appStoreBtn = dialog.querySelector(
+            '[data-store-link="appstore"]'
+          );
+          if (appStoreBtn) {
+            appStoreBtn.href = data.trackViewUrl;
+          }
+        }
+
+        if (statsContainer.dataset.currentStore === 'appstore') {
+          renderStoreStats(statsContainer, 'appstore');
+        }
+      }
+    }
+  }
+
+  function updateProjectGalleryControls(carousel) {
+    const gallery = carousel.querySelector('.project-gallery');
+    if (!gallery) return;
+
+    const prevButton = carousel.querySelector(
+      '.project-gallery__arrow--prev, [data-gallery-direction="-1"]'
+    );
+    const nextButton = carousel.querySelector(
+      '.project-gallery__arrow--next, [data-gallery-direction="1"]'
+    );
+    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+
+    if (prevButton) {
+      const atStart = gallery.scrollLeft <= 4;
+      prevButton.disabled = atStart;
+      prevButton.classList.toggle('is-hidden', atStart || maxScroll <= 4);
+    }
+
+    if (nextButton) {
+      const atEnd = gallery.scrollLeft >= maxScroll - 4;
+      nextButton.disabled = atEnd;
+      nextButton.classList.toggle('is-hidden', atEnd || maxScroll <= 4);
+    }
   }
 
   document.querySelectorAll('[data-project-dialog]').forEach(function(trigger) {
@@ -201,10 +368,13 @@ $(function() {
 
         scrollContainer.scrollTop = 0;
         header.classList.remove('is-compact');
+        document.body.classList.add('dialog-open');
+        document.documentElement.classList.add('dialog-open');
         dialog.showModal();
         dialog
           .querySelectorAll('.project-gallery__carousel')
           .forEach(updateProjectGalleryControls);
+        loadAppStats(dialog);
       }
     });
   });
@@ -213,6 +383,13 @@ $(function() {
     const closeButton = dialog.querySelector('.project-dialog__close');
     const scrollContainer = dialog.querySelector('.project-dialog__scroll');
     const header = dialog.querySelector('.project-dialog__header');
+
+    function handleDialogClose() {
+      document.body.classList.remove('dialog-open');
+      document.documentElement.classList.remove('dialog-open');
+    }
+
+    dialog.addEventListener('close', handleDialogClose);
 
     closeButton.addEventListener('click', function() {
       dialog.close();
@@ -384,6 +561,14 @@ $(function() {
 
   document.querySelectorAll('.project-gallery__frame').forEach(function(frame) {
     const image = frame.querySelector('img');
+    if (!image) return;
+
+    function applyOrientation() {
+      if (image.naturalWidth && image.naturalHeight) {
+        const isLandscape = image.naturalWidth > image.naturalHeight;
+        frame.dataset.orientation = isLandscape ? 'landscape' : 'portrait';
+      }
+    }
 
     function showUnavailable() {
       frame.classList.add('project-gallery__frame--unavailable');
@@ -391,9 +576,14 @@ $(function() {
     }
 
     image.addEventListener('error', showUnavailable, { once: true });
+    image.addEventListener('load', applyOrientation, { once: true });
 
-    if (image.complete && !image.naturalWidth) {
-      showUnavailable();
+    if (image.complete) {
+      if (!image.naturalWidth) {
+        showUnavailable();
+      } else {
+        applyOrientation();
+      }
     }
   });
 
@@ -401,6 +591,8 @@ $(function() {
     .querySelectorAll('.project-gallery__carousel')
     .forEach(function(carousel) {
       const gallery = carousel.querySelector('.project-gallery');
+      if (!gallery) return;
+
       const buttons = Array.from(
         carousel.querySelectorAll('[data-gallery-direction]')
       );
@@ -413,34 +605,71 @@ $(function() {
       }
 
       buttons.forEach(function(button) {
-        button.addEventListener('click', function() {
+        button.addEventListener('click', function(e) {
+          e.preventDefault();
           const direction = Number(button.dataset.galleryDirection);
-          const currentIndex = items.reduce(function(
-            closestIndex,
-            item,
-            index
-          ) {
-            const itemOffset = item.offsetLeft - items[0].offsetLeft;
-            const closestOffset =
-              items[closestIndex].offsetLeft - items[0].offsetLeft;
+          const scrollStep =
+            items.length > 0 && items[0].offsetWidth > 50
+              ? items[0].offsetWidth + 16
+              : 350;
 
-            return Math.abs(itemOffset - gallery.scrollLeft) <
-              Math.abs(closestOffset - gallery.scrollLeft)
-              ? index
-              : closestIndex;
-          },
-          0);
-          const nextIndex = Math.max(
-            0,
-            Math.min(items.length - 1, currentIndex + direction)
-          );
-
-          gallery.scrollTo({
-            left: items[nextIndex].offsetLeft - items[0].offsetLeft,
+          gallery.scrollBy({
+            left: direction * scrollStep,
             behavior: 'smooth',
           });
         });
       });
+
+      // Mouse drag-to-scroll support
+      let isDown = false;
+      let startX = 0;
+      let startScrollLeft = 0;
+      let hasDragged = false;
+
+      gallery.addEventListener('mousedown', function(e) {
+        if (e.button !== 0) return;
+        isDown = true;
+        hasDragged = false;
+        gallery.classList.add('is-dragging');
+        startX = e.pageX - gallery.offsetLeft;
+        startScrollLeft = gallery.scrollLeft;
+      });
+
+      window.addEventListener('mouseup', function() {
+        if (isDown) {
+          isDown = false;
+          gallery.classList.remove('is-dragging');
+        }
+      });
+
+      gallery.addEventListener('mouseleave', function() {
+        if (isDown) {
+          isDown = false;
+          gallery.classList.remove('is-dragging');
+        }
+      });
+
+      gallery.addEventListener('mousemove', function(e) {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - gallery.offsetLeft;
+        const walk = (x - startX) * 1.35;
+        if (Math.abs(walk) > 4) {
+          hasDragged = true;
+        }
+        gallery.scrollLeft = startScrollLeft - walk;
+      });
+
+      gallery.addEventListener(
+        'click',
+        function(e) {
+          if (hasDragged) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        },
+        true
+      );
 
       gallery.addEventListener('scroll', updateControls, { passive: true });
       window.addEventListener('resize', updateControls);

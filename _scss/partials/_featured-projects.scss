@@ -474,108 +474,383 @@
     line-height: 1.55;
   }
 
-  &__downloads {
+  &__downloads,
+  &__actions {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
-    margin-top: 18px;
+    align-items: center;
+    gap: 14px;
+    margin-top: 24px;
+    padding-top: 18px;
+    border-top: 1px solid rgba($slate, 0.2);
   }
 
-  &__visit {
+  &__store-btn {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    margin-top: 18px;
-    padding: 11px 16px;
-    border-radius: 999px;
-    background: $blue;
-    color: $white;
-    font-weight: 600;
+    gap: 12px;
+    min-width: 175px;
+    padding: 9px 18px;
+    border: 1px solid rgba($dark-grey, 0.2);
+    border-radius: 14px;
+    background: #0f131a;
+    color: #ffffff;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 
     &:hover,
     &:focus-visible {
-      background: $blue;
+      background: #1e2430;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
     }
 
+    &--appstore {
+      background: #000000;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    &--playstore {
+      background: #0c1017;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
   }
 
-  &__downloads &__visit {
-    margin-top: 0;
+  &__store-icon {
+    flex: 0 0 22px;
+    width: 22px !important;
+    height: 22px !important;
+    max-width: 22px !important;
+    max-height: 22px !important;
+    display: inline-block;
+  }
+
+  &__store-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    line-height: 1.15;
+  }
+
+  &__store-sub {
+    font-size: 0.62rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    opacity: 0.85;
+    text-transform: uppercase;
+  }
+
+  &__store-main {
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  &__explore-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 26px;
+    border: 1px solid rgba($blue, 0.3);
+    border-radius: 999px;
+    background: $blue;
+    color: $white;
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 6px 18px rgba($blue, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      background: darken($blue, 5%);
+      color: $white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba($blue, 0.35);
+    }
+
+    span {
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover span {
+      transform: translate(2px, -2px);
+    }
   }
 }
 
+// Lock background page scroll when modal is open
+body.dialog-open,
+html.dialog-open {
+  overflow: hidden !important;
+  height: 100vh !important;
+  touch-action: none;
+}
+
+// App Information Stats Bar (3 Columns + Store Selector)
+.project-app-stats {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 0;
+  margin: 12px 0 6px;
+  padding: 14px 8px;
+  overflow-x: auto;
+  border: 1px solid rgba($slate, 0.22);
+  border-radius: 16px;
+  background: rgba($white, 0.7);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 16px rgba($dark-grey, 0.04);
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 2px;
+
+    h3 {
+      margin: 0 !important;
+    }
+  }
+
+  &__tabs {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px;
+    border: 1px solid rgba($slate, 0.25);
+    border-radius: 999px;
+    background: rgba($slate, 0.08);
+  }
+
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: $grey;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    line-height: 1;
+    transition: all 0.2s ease;
+
+    svg {
+      flex: 0 0 13px;
+      width: 13px !important;
+      height: 13px !important;
+      max-width: 13px !important;
+      max-height: 13px !important;
+      display: inline-block;
+      vertical-align: -1px;
+    }
+
+    &:hover {
+      color: $black;
+    }
+
+    &.is-active {
+      background: $white;
+      color: $black;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    }
+  }
+
+  &__pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border: 1px solid rgba($slate, 0.25);
+    border-radius: 999px;
+    background: rgba($slate, 0.08);
+    color: $grey;
+    font-size: 0.72rem;
+    font-weight: 600;
+    line-height: 1;
+
+    svg {
+      flex: 0 0 13px;
+      width: 13px !important;
+      height: 13px !important;
+      max-width: 13px !important;
+      max-height: 13px !important;
+      display: inline-block;
+      vertical-align: -1px;
+    }
+  }
+
+  // Exactly 3 clean columns
+  &__item {
+    position: relative;
+    display: flex;
+    flex: 1 1 0;
+    min-width: 90px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 12px;
+    text-align: center;
+
+    &:not(:last-child)::after {
+      position: absolute;
+      top: 15%;
+      right: 0;
+      bottom: 15%;
+      width: 1px;
+      background: rgba($slate, 0.22);
+      content: '';
+    }
+  }
+
+  &__label {
+    margin-bottom: 4px;
+    color: $grey;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &__value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    color: $black;
+    font-size: 1.45rem;
+    font-weight: 800;
+    line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__stars {
+    margin-top: 3px;
+    color: #f5a623;
+    font-size: 0.78rem;
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  &__sub {
+    max-width: 120px;
+    margin-top: 3px;
+    overflow: hidden;
+    color: $grey;
+    font-size: 0.72rem;
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// Compact Gallery Carousel with Modern Side Arrows & Drag-to-Scroll
 .project-gallery {
   display: flex;
-  gap: 18px;
+  gap: 14px;
   overflow-x: auto;
-  padding: 2px 2px 14px;
-  scroll-snap-type: x proximity;
-  overscroll-behavior-x: contain;
+  overflow-y: hidden;
+  padding: 6px 2px 12px;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; // Hide Firefox scrollbar
+  -ms-overflow-style: none; // Hide IE/Edge scrollbar
+  cursor: grab;
+
+  &::-webkit-scrollbar {
+    display: none; // Hide Chrome, Safari scrollbar
+  }
+
+  &.is-dragging {
+    cursor: grabbing;
+    scroll-behavior: auto;
+    user-select: none;
+  }
 
   &__carousel {
+    position: relative;
+    width: 100%;
     min-width: 0;
   }
 
-  &__controls {
-    display: none;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  &__controls.is-scrollable {
+  // Modern minimal circular floating arrows
+  &__arrow {
+    position: absolute;
+    top: 50%;
+    z-index: 10;
     display: flex;
-  }
-
-  &__control {
-    display: grid;
     width: 38px;
     height: 38px;
-    place-items: center;
-    border: 1px solid rgba($slate, 0.3);
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, 0.08);
     border-radius: 50%;
-    background: rgba($white, 0.85);
-    color: $dark-grey;
-    font-size: 1.8rem;
-    line-height: 1;
+    background: rgba(255, 255, 255, 0.94);
+    color: #1a1e28;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
     cursor: pointer;
-    transition:
-      background 0.2s ease,
-      border-color 0.2s ease,
-      opacity 0.2s ease;
+    transform: translateY(-50%);
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 
-    &:hover:not(:disabled),
-    &:focus-visible {
-      border-color: $blue;
-      background: rgba($blue, 0.08);
+    svg {
+      width: 20px !important;
+      height: 20px !important;
+      max-width: 20px !important;
+      max-height: 20px !important;
+      fill: none !important;
+      stroke: currentColor !important;
+      transition: transform 0.2s ease;
     }
 
-    &:disabled {
-      cursor: default;
-      opacity: 0.35;
+    &:hover:not(:disabled) {
+      background: #ffffff;
+      color: $blue;
+      border-color: rgba($blue, 0.25);
+      box-shadow: 0 6px 20px rgba($blue, 0.22);
+      transform: translateY(-50%) scale(1.1);
     }
-  }
 
-  &__status {
-    min-width: 42px;
-    color: $grey;
-    font-size: 0.82rem;
-    font-variant-numeric: tabular-nums;
-    text-align: center;
-  }
+    &:active:not(:disabled) {
+      transform: translateY(-50%) scale(0.95);
+    }
 
-  &__empty {
-    display: grid;
-    min-width: 240px;
-    min-height: 180px;
-    margin: 0;
-    padding: 24px;
-    place-items: center;
-    border: 1px dashed rgba($slate, 0.65);
-    border-radius: 18px;
-    color: $grey;
-    text-align: center;
+    &:disabled,
+    &.is-hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-50%) scale(0.85);
+    }
+
+    &--prev {
+      left: 8px;
+      &:hover:not(:disabled) svg {
+        transform: translateX(-1.5px);
+      }
+    }
+
+    &--next {
+      right: 8px;
+      &:hover:not(:disabled) svg {
+        transform: translateX(1.5px);
+      }
+    }
   }
 
   &__item {
@@ -583,34 +858,56 @@
     flex: 0 0 auto;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
     margin: 0;
     scroll-snap-align: start;
 
     figcaption {
       max-width: 100%;
       color: $grey;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       text-align: center;
     }
   }
 
+  // Compact sizing: Height 420px on Desktop & iPad (no vertical scroll needed!)
   &__frame {
     position: relative;
     display: flex;
-    width: min(68vw, 245px);
-    aspect-ratio: 9 / 19.5;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    border-radius: 24px;
+    border-radius: 20px;
     background: rgba($slate, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
 
-    img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    // Portrait: 205x420 px
+    &[data-orientation="portrait"],
+    &:not([data-orientation="landscape"]) {
+      width: 205px;
+      height: 420px;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 20px;
+        object-fit: cover;
+      }
+    }
+
+    // Landscape (web project): Height 420px, width adjusts to image
+    &[data-orientation="landscape"] {
+      width: auto;
+      max-width: 100%;
+      height: 420px;
+
+      img {
+        width: auto;
+        max-width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        object-fit: contain;
+      }
     }
 
     &--unavailable {
@@ -624,6 +921,136 @@
 
       img {
         display: none;
+      }
+    }
+  }
+}
+
+// Mobile Screen (<768px): 135x280 px for portrait, height 280px for landscape
+@media (max-width: 767px) {
+  .project-app-stats {
+    padding: 10px 6px;
+
+    &__item {
+      min-width: 75px;
+      padding: 2px 6px;
+    }
+
+    &__label {
+      font-size: 0.58rem;
+    }
+
+    &__value {
+      font-size: 1.15rem;
+    }
+
+    &__sub {
+      font-size: 0.65rem;
+      max-width: 80px;
+    }
+  }
+
+  .project-gallery {
+    gap: 10px;
+    padding-bottom: 10px;
+
+    &__arrow {
+      width: 32px;
+      height: 32px;
+
+      &--prev {
+        left: 4px;
+      }
+
+      &--next {
+        right: 4px;
+      }
+    }
+
+    &__frame {
+      border-radius: 14px;
+
+      // Mobile portrait: 135x280 px
+      &[data-orientation="portrait"],
+      &:not([data-orientation="landscape"]) {
+        width: 135px;
+        height: 280px;
+
+        img {
+          border-radius: 14px;
+        }
+      }
+
+      // Mobile landscape: height 280px
+      &[data-orientation="landscape"] {
+        height: 280px;
+        width: auto;
+
+        img {
+          height: 100%;
+          width: auto;
+          border-radius: 12px;
+        }
+      }
+    }
+  }
+
+  .project-dialog__downloads,
+  .project-dialog__actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    .project-dialog__store-btn,
+    .project-dialog__explore-btn {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+// Night Mode Styles for New Components
+body.night {
+  .project-app-stats {
+    border-color: rgba($white, 0.12);
+    background: rgba($night, 0.82);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+    &__item:not(:last-child)::after {
+      background: rgba($white, 0.12);
+    }
+
+    &__value {
+      color: $off-white;
+    }
+  }
+
+  .project-gallery {
+    &__frame {
+      background: rgba($white, 0.04);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    &__arrow {
+      border-color: rgba($white, 0.18);
+      background: rgba(22, 27, 34, 0.88);
+      color: $off-white;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+
+      &:hover:not(:disabled) {
+        border-color: rgba($blue, 0.5);
+        background: rgba(33, 40, 52, 0.95);
+        color: $blue;
+      }
+    }
+  }
+
+  .project-dialog {
+    &__store-btn {
+      border-color: rgba($white, 0.2);
+
+      &:hover,
+      &:focus-visible {
+        background: #252c3b;
       }
     }
   }

@@ -102,6 +102,98 @@
       </section>
       {% endif %}
 
+      {% if include.project.platform == 'Mobile' or include.project.action_type == 'mobile_application' or include.project.action_type == 'mobile_app' or include.project.app_stats or include.project.play_stats or include.project.app_store_id or include.project.play_store_id %}
+      <section class="project-dialog__section project-dialog__section--app-info">
+        <div class="project-app-stats__topbar">
+          <h3>App Information</h3>
+          {% if include.project.app_store_id and include.project.play_store_id %}
+          <div class="project-app-stats__tabs" role="tablist" aria-label="Select store data">
+            <button class="project-app-stats__tab is-active" type="button" data-store-tab="appstore">
+              <svg viewBox="0 0 384 512" width="12" height="12" fill="currentColor">
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+              </svg>
+              App Store
+            </button>
+            <button class="project-app-stats__tab" type="button" data-store-tab="playstore">
+              <svg viewBox="0 0 512 512" width="12" height="12" fill="none">
+                <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z" fill="#00E676"/>
+                <path d="M47 38.2c-5.5 8.9-8.7 20.3-8.7 33.8v368c0 13.5 3.2 24.9 8.7 33.8L281.8 256 47 38.2z" fill="#00B0FF"/>
+                <path d="M325.3 277.7l60.1 60.1L104.6 499l220.7-221.3z" fill="#FF3D00"/>
+                <path d="M447.8 238.4l-62.4-36.2-60.1 60.1 60.1 60.1 62.4-36.2c16.3-9.5 26.2-26.6 26.2-47.8s-9.9-38.3-26.2-47.8z" fill="#FFC400"/>
+              </svg>
+              Google Play
+            </button>
+          </div>
+          {% elsif include.project.play_store_id and include.project.app_store_id == nil %}
+          <span class="project-app-stats__pill">
+            <svg viewBox="0 0 512 512" width="12" height="12" fill="none">
+              <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z" fill="#00E676"/>
+              <path d="M47 38.2c-5.5 8.9-8.7 20.3-8.7 33.8v368c0 13.5 3.2 24.9 8.7 33.8L281.8 256 47 38.2z" fill="#00B0FF"/>
+              <path d="M325.3 277.7l60.1 60.1L104.6 499l220.7-221.3z" fill="#FF3D00"/>
+              <path d="M447.8 238.4l-62.4-36.2-60.1 60.1 60.1 60.1 62.4-36.2c16.3-9.5 26.2-26.6 26.2-47.8s-9.9-38.3-26.2-47.8z" fill="#FFC400"/>
+            </svg>
+            Google Play
+          </span>
+          {% elsif include.project.app_store_id and include.project.play_store_id == nil %}
+          <span class="project-app-stats__pill">
+            <svg viewBox="0 0 384 512" width="12" height="12" fill="currentColor">
+              <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+            </svg>
+            App Store
+          </span>
+          {% endif %}
+        </div>
+
+        <div
+          class="project-app-stats"
+          {% if include.project.app_store_id %}data-appstore-id="{{include.project.app_store_id}}"{% endif %}
+          {% if include.project.play_store_id %}data-playstore-id="{{include.project.play_store_id}}"{% endif %}
+          data-current-store="{% if include.project.app_store_id %}appstore{% elsif include.project.play_store_id %}playstore{% else %}appstore{% endif %}"
+          {% if include.project.app_stats.rating %}data-appstore-rating="{{include.project.app_stats.rating}}"{% endif %}
+          {% if include.project.app_stats.total_reviews %}data-appstore-reviews="{{include.project.app_stats.total_reviews}}"{% endif %}
+          {% if include.project.app_stats.chart_rank %}data-appstore-rank="{{include.project.app_stats.chart_rank}}"{% endif %}
+          {% if include.project.app_stats.category %}data-appstore-category="{{include.project.app_stats.category}}"{% endif %}
+          {% if include.project.app_stats.content_rating %}data-appstore-age="{{include.project.app_stats.content_rating}}"{% endif %}
+          {% if include.project.play_stats.rating %}data-playstore-rating="{{include.project.play_stats.rating}}"{% endif %}
+          {% if include.project.play_stats.total_reviews %}data-playstore-reviews="{{include.project.play_stats.total_reviews}}"{% endif %}
+          {% if include.project.play_stats.chart_rank %}data-playstore-rank="{{include.project.play_stats.chart_rank}}"{% endif %}
+          {% if include.project.play_stats.category %}data-playstore-category="{{include.project.play_stats.category}}"{% endif %}
+          {% if include.project.play_stats.content_rating %}data-playstore-age="{{include.project.play_stats.content_rating}}"{% endif %}
+        >
+          <!-- 1. Penilaian -->
+          <div class="project-app-stats__item" data-stat="rating">
+            <span class="project-app-stats__label" data-stat-label="reviews">
+              {% if include.project.app_stats.total_reviews %}{{include.project.app_stats.total_reviews}} PENILAIAN{% elsif include.project.play_stats.total_reviews %}{{include.project.play_stats.total_reviews}} PENILAIAN{% else %}PENILAIAN{% endif %}
+            </span>
+            <div class="project-app-stats__value" data-stat-value="rating">
+              {{include.project.app_stats.rating | default: include.project.play_stats.rating | default: "4.5"}}
+            </div>
+            <div class="project-app-stats__stars" data-stat-stars>★★★★★</div>
+          </div>
+
+          <!-- 2. Kategori Usia -->
+          <div class="project-app-stats__item" data-stat="age">
+            <span class="project-app-stats__label">KATEGORI USIA</span>
+            <div class="project-app-stats__value" data-stat-value="age">
+              {{include.project.app_stats.content_rating | default: include.project.play_stats.content_rating | default: "4+"}}
+            </div>
+            <span class="project-app-stats__sub">Tahun</span>
+          </div>
+
+          <!-- 3. Peringkat & Kategori -->
+          <div class="project-app-stats__item" data-stat="chart">
+            <span class="project-app-stats__label">PERINGKAT</span>
+            <div class="project-app-stats__value" data-stat-value="rank">
+              {{include.project.app_stats.chart_rank | default: include.project.play_stats.chart_rank | default: "#8"}}
+            </div>
+            <span class="project-app-stats__sub" data-stat-value="category">
+              {{include.project.app_stats.category | default: include.project.play_stats.category | default: "Berbelanja"}}
+            </span>
+          </div>
+        </div>
+      </section>
+      {% endif %}
+
       {% if include.project.technologies %}
       <section class="project-dialog__section">
         <h3>Tech stack</h3>
@@ -115,9 +207,22 @@
 
       {% if include.project.show_gallery != false %}
         {% if include.project.gallery or include.project.image %}
-        <section class="project-dialog__section">
+        <section class="project-dialog__section project-dialog__section--gallery">
           <h3>Gallery</h3>
           <div class="project-gallery__carousel" aria-roledescription="carousel">
+            <!-- Tombol Navigasi Prev Modern (Kiri Tengah) -->
+            <button
+              class="project-gallery__arrow project-gallery__arrow--prev"
+              type="button"
+              data-gallery-direction="-1"
+              aria-label="Previous image"
+              aria-controls="{{include.dialog_id}}-gallery"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+            </button>
+
             <div
               class="project-gallery"
               id="{{include.dialog_id}}-gallery"
@@ -126,7 +231,10 @@
               {% if include.project.gallery %}
                 {% for screenshot in include.project.gallery %}
                 <figure class="project-gallery__item">
-                  <div class="project-gallery__frame">
+                  <div
+                    class="project-gallery__frame"
+                    data-orientation="{% if screenshot.orientation %}{{screenshot.orientation}}{% elsif include.project.platform == 'Mobile' %}portrait{% else %}landscape{% endif %}"
+                  >
                     <img
                       src="{% if screenshot.image contains '://' %}{{screenshot.image}}{% else %}{{site.baseurl}}{{screenshot.image}}{% endif %}"
                       alt="{{screenshot.alt | default: include.project.image_alt}}"
@@ -140,62 +248,92 @@
                 {% endfor %}
               {% else %}
               <figure class="project-gallery__item">
-                <div class="project-gallery__frame" data-device="auto">
+                <div
+                  class="project-gallery__frame"
+                  data-orientation="{% if include.project.platform == 'Mobile' %}portrait{% else %}landscape{% endif %}"
+                >
                   <img src="{{site.baseurl}}{{include.project.image}}" alt="{{include.project.image_alt}}" loading="lazy">
                 </div>
               </figure>
               {% endif %}
             </div>
-            <div class="project-gallery__controls" aria-label="Gallery navigation">
-              <button
-                class="project-gallery__control"
-                type="button"
-                data-gallery-direction="-1"
-                aria-label="Previous image"
-                aria-controls="{{include.dialog_id}}-gallery"
-              >
-                <span aria-hidden="true">&lsaquo;</span>
-              </button>
-              <span class="project-gallery__status" aria-live="polite"></span>
-              <button
-                class="project-gallery__control"
-                type="button"
-                data-gallery-direction="1"
-                aria-label="Next image"
-                aria-controls="{{include.dialog_id}}-gallery"
-              >
-                <span aria-hidden="true">&rsaquo;</span>
-              </button>
-            </div>
+
+            <!-- Tombol Navigasi Next Modern (Kanan Tengah) -->
+            <button
+              class="project-gallery__arrow project-gallery__arrow--next"
+              type="button"
+              data-gallery-direction="1"
+              aria-label="Next image"
+              aria-controls="{{include.dialog_id}}-gallery"
+            >
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+            </button>
           </div>
         </section>
         {% endif %}
       {% endif %}
 
-      {% if include.project.action_type == 'web_application' and include.project.url %}
-      <a class="project-dialog__visit" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
-        Visit Project <span aria-hidden="true">&nearr;</span>
-      </a>
-      {% elsif include.project.action_type == 'mobile_app' or include.project.action_type == 'mobile_application' %}
+      {% if include.project.platform == 'Mobile' or include.project.action_type == 'mobile_application' or include.project.action_type == 'mobile_app' %}
       <div class="project-dialog__downloads">
-        {% if include.project.app_store_url %}
-        <a class="project-dialog__visit" href="{{include.project.app_store_url}}" target="_blank" rel="noopener noreferrer">
-          Download on the App Store <span aria-hidden="true">&nearr;</span>
+        {% if include.project.app_store_url or include.project.app_store_id %}
+        <a
+          class="project-dialog__store-btn project-dialog__store-btn--appstore"
+          href="{% if include.project.app_store_url %}{{include.project.app_store_url}}{% else %}https://apps.apple.com/id/app/id{{include.project.app_store_id}}{% endif %}"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-store-link="appstore"
+          aria-label="Download {{include.project.name}} on the App Store"
+        >
+          <svg class="project-dialog__store-icon" viewBox="0 0 384 512" width="22" height="22" fill="currentColor">
+            <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+          </svg>
+          <div class="project-dialog__store-text">
+            <span class="project-dialog__store-sub">Download on the</span>
+            <span class="project-dialog__store-main">App Store</span>
+          </div>
         </a>
         {% endif %}
-        {% if include.project.play_store_url %}
-        <a class="project-dialog__visit" href="{{include.project.play_store_url}}" target="_blank" rel="noopener noreferrer">
-          Get it on Google Play <span aria-hidden="true">&nearr;</span>
+
+        {% if include.project.play_store_url or include.project.play_store_id %}
+        <a
+          class="project-dialog__store-btn project-dialog__store-btn--playstore"
+          href="{% if include.project.play_store_url %}{{include.project.play_store_url}}{% else %}https://play.google.com/store/apps/details?id={{include.project.play_store_id}}{% endif %}"
+          target="_blank"
+          rel="noopener noreferrer"
+          data-store-link="playstore"
+          aria-label="Get {{include.project.name}} on Google Play"
+        >
+          <svg class="project-dialog__store-icon" viewBox="0 0 512 512" width="22" height="22" fill="none">
+            <path d="M325.3 234.3L104.6 13l280.8 161.2-60.1 60.1z" fill="#00E676"/>
+            <path d="M47 38.2c-5.5 8.9-8.7 20.3-8.7 33.8v368c0 13.5 3.2 24.9 8.7 33.8L281.8 256 47 38.2z" fill="#00B0FF"/>
+            <path d="M325.3 277.7l60.1 60.1L104.6 499l220.7-221.3z" fill="#FF3D00"/>
+            <path d="M447.8 238.4l-62.4-36.2-60.1 60.1 60.1 60.1 62.4-36.2c16.3-9.5 26.2-26.6 26.2-47.8s-9.9-38.3-26.2-47.8z" fill="#FFC400"/>
+          </svg>
+          <div class="project-dialog__store-text">
+            <span class="project-dialog__store-sub">GET IT ON</span>
+            <span class="project-dialog__store-main">Google Play</span>
+          </div>
         </a>
         {% endif %}
-        {% unless include.project.app_store_url or include.project.play_store_url %}
+
+        {% unless include.project.app_store_url or include.project.app_store_id or include.project.play_store_url or include.project.play_store_id %}
           {% if include.project.url %}
-        <a class="project-dialog__visit" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
-          View Project Source <span aria-hidden="true">&nearr;</span>
-        </a>
+          <a class="project-dialog__explore-btn" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
+            Explore Project <span aria-hidden="true">&nearr;</span>
+          </a>
           {% endif %}
         {% endunless %}
       </div>
+      {% else %}
+        {% if include.project.url %}
+        <div class="project-dialog__actions">
+          <a class="project-dialog__explore-btn" href="{{include.project.url}}" target="_blank" rel="noopener noreferrer">
+            Explore Website <span aria-hidden="true">&nearr;</span>
+          </a>
+        </div>
+        {% endif %}
       {% endif %}
     </div>
   </div>
