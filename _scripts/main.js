@@ -147,6 +147,50 @@ $(function() {
     });
   }
 
+  function updateProjectGalleryControls(carousel) {
+    const gallery = carousel.querySelector('.project-gallery');
+    const controls = carousel.querySelector('.project-gallery__controls');
+    const buttons = Array.from(
+      carousel.querySelectorAll('[data-gallery-direction]')
+    );
+    const status = carousel.querySelector('.project-gallery__status');
+    const items = Array.from(
+      gallery.querySelectorAll('.project-gallery__item')
+    );
+    const maxScroll = gallery.scrollWidth - gallery.clientWidth;
+    const isScrollable = maxScroll > 1;
+
+    controls.classList.toggle('is-scrollable', isScrollable);
+
+    if (!isScrollable) {
+      return;
+    }
+
+    const currentScroll = gallery.scrollLeft;
+    const currentIndex = items.reduce(function(closestIndex, item, index) {
+      const targetScroll = Math.min(
+        item.offsetLeft - items[0].offsetLeft,
+        maxScroll
+      );
+      const closestTarget = Math.min(
+        items[closestIndex].offsetLeft - items[0].offsetLeft,
+        maxScroll
+      );
+
+      return Math.abs(targetScroll - currentScroll) <
+        Math.abs(closestTarget - currentScroll)
+        ? index
+        : closestIndex;
+    }, 0);
+
+    status.textContent = currentIndex + 1 + ' / ' + items.length;
+    buttons.forEach(function(button) {
+      const direction = Number(button.dataset.galleryDirection);
+      button.disabled =
+        direction < 0 ? currentScroll <= 1 : currentScroll >= maxScroll - 1;
+    });
+  }
+
   document.querySelectorAll('[data-project-dialog]').forEach(function(trigger) {
     trigger.addEventListener('click', function() {
       const dialog = document.getElementById(trigger.dataset.projectDialog);
@@ -158,6 +202,9 @@ $(function() {
         scrollContainer.scrollTop = 0;
         header.classList.remove('is-compact');
         dialog.showModal();
+        dialog
+          .querySelectorAll('.project-gallery__carousel')
+          .forEach(updateProjectGalleryControls);
       }
     });
   });
@@ -338,32 +385,67 @@ $(function() {
   document.querySelectorAll('.project-gallery__frame').forEach(function(frame) {
     const image = frame.querySelector('img');
 
-    function setFrameFromImage() {
-      if (!image.naturalWidth || !image.naturalHeight) {
-        return;
-      }
-
-      const isLandscape = image.naturalWidth > image.naturalHeight;
-      const orientation = isLandscape ? 'landscape' : 'portrait';
-      frame.classList.add('project-gallery__frame--' + orientation);
-      frame.style.aspectRatio =
-        image.naturalWidth + ' / ' + image.naturalHeight;
-    }
-
     function showUnavailable() {
       frame.classList.add('project-gallery__frame--unavailable');
       console.error('Unable to load project screenshot:', image.src);
     }
 
-    image.addEventListener('load', setFrameFromImage, { once: true });
     image.addEventListener('error', showUnavailable, { once: true });
 
-    if (image.complete && image.naturalWidth > 0) {
-      setFrameFromImage();
-    } else if (image.complete) {
+    if (image.complete && !image.naturalWidth) {
       showUnavailable();
     }
   });
+
+  document
+    .querySelectorAll('.project-gallery__carousel')
+    .forEach(function(carousel) {
+      const gallery = carousel.querySelector('.project-gallery');
+      const buttons = Array.from(
+        carousel.querySelectorAll('[data-gallery-direction]')
+      );
+      const items = Array.from(
+        gallery.querySelectorAll('.project-gallery__item')
+      );
+
+      function updateControls() {
+        updateProjectGalleryControls(carousel);
+      }
+
+      buttons.forEach(function(button) {
+        button.addEventListener('click', function() {
+          const direction = Number(button.dataset.galleryDirection);
+          const currentIndex = items.reduce(function(
+            closestIndex,
+            item,
+            index
+          ) {
+            const itemOffset = item.offsetLeft - items[0].offsetLeft;
+            const closestOffset =
+              items[closestIndex].offsetLeft - items[0].offsetLeft;
+
+            return Math.abs(itemOffset - gallery.scrollLeft) <
+              Math.abs(closestOffset - gallery.scrollLeft)
+              ? index
+              : closestIndex;
+          },
+          0);
+          const nextIndex = Math.max(
+            0,
+            Math.min(items.length - 1, currentIndex + direction)
+          );
+
+          gallery.scrollTo({
+            left: items[nextIndex].offsetLeft - items[0].offsetLeft,
+            behavior: 'smooth',
+          });
+        });
+      });
+
+      gallery.addEventListener('scroll', updateControls, { passive: true });
+      window.addEventListener('resize', updateControls);
+      updateControls();
+    });
 
   document.querySelectorAll('.brand-card__logo img').forEach(function(image) {
     function showWordmark() {

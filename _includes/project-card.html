@@ -117,29 +117,56 @@
         {% if include.project.gallery or include.project.image %}
         <section class="project-dialog__section">
           <h3>Gallery</h3>
-          <div class="project-gallery" aria-label="{{include.project.name}} project gallery">
-            {% if include.project.gallery %}
-              {% for screenshot in include.project.gallery %}
+          <div class="project-gallery__carousel" aria-roledescription="carousel">
+            <div
+              class="project-gallery"
+              id="{{include.dialog_id}}-gallery"
+              aria-label="{{include.project.name}} project gallery"
+            >
+              {% if include.project.gallery %}
+                {% for screenshot in include.project.gallery %}
+                <figure class="project-gallery__item">
+                  <div class="project-gallery__frame">
+                    <img
+                      src="{% if screenshot.image contains '://' %}{{screenshot.image}}{% else %}{{site.baseurl}}{{screenshot.image}}{% endif %}"
+                      alt="{{screenshot.alt | default: include.project.image_alt}}"
+                      loading="lazy"
+                    >
+                  </div>
+                  {% if screenshot.caption %}
+                  <figcaption>{{screenshot.caption}}</figcaption>
+                  {% endif %}
+                </figure>
+                {% endfor %}
+              {% else %}
               <figure class="project-gallery__item">
-                <div class="project-gallery__frame">
-                  <img
-                    src="{% if screenshot.image contains '://' %}{{screenshot.image}}{% else %}{{site.baseurl}}{{screenshot.image}}{% endif %}"
-                    alt="{{screenshot.alt | default: include.project.image_alt}}"
-                    loading="lazy"
-                  >
+                <div class="project-gallery__frame" data-device="auto">
+                  <img src="{{site.baseurl}}{{include.project.image}}" alt="{{include.project.image_alt}}" loading="lazy">
                 </div>
-                {% if screenshot.caption %}
-                <figcaption>{{screenshot.caption}}</figcaption>
-                {% endif %}
               </figure>
-              {% endfor %}
-            {% else %}
-            <figure class="project-gallery__item">
-              <div class="project-gallery__frame" data-device="auto">
-                <img src="{{site.baseurl}}{{include.project.image}}" alt="{{include.project.image_alt}}" loading="lazy">
-              </div>
-            </figure>
-            {% endif %}
+              {% endif %}
+            </div>
+            <div class="project-gallery__controls" aria-label="Gallery navigation">
+              <button
+                class="project-gallery__control"
+                type="button"
+                data-gallery-direction="-1"
+                aria-label="Previous image"
+                aria-controls="{{include.dialog_id}}-gallery"
+              >
+                <span aria-hidden="true">&lsaquo;</span>
+              </button>
+              <span class="project-gallery__status" aria-live="polite"></span>
+              <button
+                class="project-gallery__control"
+                type="button"
+                data-gallery-direction="1"
+                aria-label="Next image"
+                aria-controls="{{include.dialog_id}}-gallery"
+              >
+                <span aria-hidden="true">&rsaquo;</span>
+              </button>
+            </div>
           </div>
         </section>
         {% endif %}

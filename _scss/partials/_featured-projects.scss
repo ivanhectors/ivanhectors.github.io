@@ -509,8 +509,61 @@
   gap: 18px;
   overflow-x: auto;
   padding: 2px 2px 14px;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   overscroll-behavior-x: contain;
+
+  &__carousel {
+    min-width: 0;
+  }
+
+  &__controls {
+    display: none;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+  }
+
+  &__controls.is-scrollable {
+    display: flex;
+  }
+
+  &__control {
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid rgba($slate, 0.3);
+    border-radius: 50%;
+    background: rgba($white, 0.85);
+    color: $dark-grey;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      opacity 0.2s ease;
+
+    &:hover:not(:disabled),
+    &:focus-visible {
+      border-color: $blue;
+      background: rgba($blue, 0.08);
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.35;
+    }
+  }
+
+  &__status {
+    min-width: 42px;
+    color: $grey;
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
 
   &__empty {
     display: grid;
@@ -545,8 +598,8 @@
   &__frame {
     position: relative;
     display: flex;
-    width: min(82vw, 540px);
-    aspect-ratio: 16 / 9;
+    width: min(68vw, 245px);
+    aspect-ratio: 9 / 19.5;
     align-items: center;
     justify-content: center;
     overflow: hidden;
@@ -558,14 +611,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-    }
-
-    &--portrait {
-      width: min(68vw, 300px);
-    }
-
-    &--landscape {
-      width: min(82vw, 540px);
     }
 
     &--unavailable {
@@ -882,16 +927,6 @@ body.night .all-projects {
 
     &__description {
       font-size: 1rem;
-    }
-  }
-
-  .project-gallery__frame {
-    &--portrait {
-      width: min(66vw, 300px);
-    }
-
-    &--landscape {
-      width: min(86vw, 480px);
     }
   }
 
